@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Missing CI | Présentation immersive</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0f2c;
+            color: #eef2ff;
+            overflow-x: hidden;
+        }
+
+        /* Effet de particules / lumière subtile */
+        .bg-glow {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at 20% 40%, rgba(79, 70, 229, 0.2), transparent 60%);
+        }
+
+        /* Conteneur principal : défilement horizontal doux */
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            scrollbar-width: none;
+        }
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .card {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(79, 70, 229, 0.2) inset;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem;
+            align-items: center;
+        }
+
+        .image-area {
+            flex: 1.2;
+            text-align: center;
+        }
+
+        .image-area img {
+            max-width: 100%;
+            max-height: 65vh;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .text-area {
+            flex: 0.8;
+            padding: 1rem;
+        }
+
+        .text-area h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c084fc, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .text-area p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #a5b4fc;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(165, 180, 252, 0.3);
+        }
+
+        /* Navigation flèches */
+        .nav-arrows {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 20;
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-arrows button {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(99, 102, 241, 0.6);
+            border-radius: 3rem;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-arrows button:hover {
+            background: #4f46e5;
+            transform: scale(1.05);
+            border-color: #c084fc;
+        }
+
+        .dots {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.8rem;
+            z-index: 20;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 3rem;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+        .dot {
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background-color: #94a3b8;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: #818cf8;
+            width: 1.8rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 8px #a5b4fc;
+        }
+
+        .logo-fixed {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 30;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 3rem;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+        .logo-fixed img {
+            height: 2.2rem;
+            width: auto;
+        }
+        .logo-fixed span {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        @media (max-width: 800px) {
+            .card-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            .text-area h2 {
+                font-size: 1.7rem;
+            }
+            .nav-arrows {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            .dots {
+                bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<!-- Logo permanent -->
+<div class="logo-fixed">
+    <img src="images/logo.png" alt="Missing CI">
+    <span>Missing.CI</span>
+</div>
+
+<!-- Flèches de navigation -->
+<div class="nav-arrows">
+    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<div class="dots" id="dotsContainer"></div>
+
+<div class="horizontal-scroll" id="scrollContainer">
+
+    <!-- 🆕 SLIDE 0 : PRÉSENTATION DE MISSING CI -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content" style="flex-direction: column; text-align: center;">
+                <div class="text-area" style="flex: unset;">
+                    
+                    <h2>🔍 Missing CI</h2>
+                    <p style="max-width: 800px; margin: 0 auto;">
+                       Une plateforme ivoirienne dédiée à la centralisation et à la diffusion des signalements de personnes disparues.
+                        Notre mission : <strong>accélérer les recherches, mobiliser la communauté et aider les familles</strong> grâce à la technologie.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        ✔ Signalements ✔ Dossiers complets ✔ Carte interactive ✔ Alertes ✔ Partage instantané
+                    </p>
+                    <div style="margin-top: 2rem;">
+                        <i class="fas fa-arrow-right" style="color: #818cf8; font-size: 2rem; animation: bounce 1.5s infinite;"></i>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Découvrez les fonctionnalités ci-dessous</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 1 – acceuil.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/acceuil.png" alt="Accueil">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Interface principale</div>
+                    <h2>🏠 Vue d’ensemble</h2>
+                    <p>Page d'accueil dynamique présentant les derniers signalements, les actions rapides et l'appel à la solidarité citoyenne.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2 – acceuil2.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/acceuil2.png" alt="Accueil 2">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Mobilisation</div>
+                    <h2>📢 Actualités et alertes</h2>
+                    <p>Suivez en temps réel les nouvelles disparitions et les appels à témoins.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 – acceuil3.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/acceuil3.png" alt="Accueil 3">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Chiffres clés</div>
+                    <h2>⚡ Boutons d'actions</h2>
+              <p>Cliquez sur le bouton d’action pour ouvrir le formulaire de signalement et déclarer une disparition en quelques étapes simples.</p> </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4 – signalementform.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/signalementform.png" alt="Signalement">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Démarche simplifiée</div>
+                    <h2>📝 Création d’un signalement</h2>
+                    <p>Formulaire complet : photos, description, lieu, date, signes distinctifs. Un dossier de qualité pour faciliter les recherches.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5 – archive.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/archive.png" alt="Archives">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Historique</div>
+                    <h2>📚 Archives des dossiers</h2>
+                    <p>Liste paginée et filtrable (nom, date, statut) pour consulter tous les cas enregistrés.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6 – double (archive.png et filtrearchive.png) -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <img src="images/filtrearchive.png" alt="Filtre à Chypre" style="max-height: 30vh;">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Recherche avancée</div>
+                    <h2>🔍 Filtres & cartographie</h2>
+                    <p>Affinez par région, âge, type de disparition. La carte interactive (leaflet) vous guide.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7 – detaildisparition.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/detaildisparition.png" alt="Fiche détail">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Informations vitales</div>
+                    <h2>👤 Fiche individuelle</h2>
+                    <p>Photo, âge, taille, signes distinctifs, chronologie des événements, témoignages et bouton "Alerte Amber".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8 – liensdisparition.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/liensdisparition.png" alt="Partage lien">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Viralité</div>
+                    <h2>🔗 Partage instantané</h2>
+                    <p>Copiez le lien unique d'un dossier et diffusez-le sur WhatsApp, Facebook, etc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9 – commentiare.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/commentiare.png" alt="Commentaires">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Participation citoyenne</div>
+                    <h2>💬 Témoignages</h2>
+                    <p>Les utilisateurs peuvent laisser des informations vérifiées par un modérateur.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10 – affiche.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/affiche.png" alt="Affiche personnalisée">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Outils pratique</div>
+                    <h2>🖼️ Génération d'affiche</h2>
+                    <p>Cliquez "Voir l'affiche" pour obtenir un visuel prêt à imprimer et diffuser dans l'espace public.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11 – apropos.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/apropos.png" alt="À propos">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Notre mission</div>
+                    <h2>📖 À propos du projet</h2>
+                    <p>Missing CI est une plateforme ivoirienne innovante pour centraliser et accélérer la recherche de personnes disparues.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12 – carte.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/carte.png" alt="Carte">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Géolocalisation</div>
+                    <h2>🗺️ Cartographie interactive</h2>
+                    <p>Un point rouge par disparition. Cliquez pour accéder au dossier. Identifiez les zones à risque.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 13 – profil.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/profil.png" alt="Profil util">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Espace personnel</div>
+                    <h2>👤 Profil utilisateur</h2>
+                    <p>Gérez vos informations, photo de profil, mots de passe et préférences.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 14 – dashboarduser.png -->
+    <div class="slide">
+        <div class="card">
+            <div class="card-content">
+                <div class="image-area">
+                    <img src="images/dashboarduser.png" alt="Dashboard">
+                </div>
+                <div class="text-area">
+                    <div class="badge">Statistiques & suivi</div>
+                    <h2>📊 Tableau de bord</h2>
+                    <p>Visualisez vos signalements, statistiques personnelles et notifications.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const scrollContainer = document.getElementById('scrollContainer');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('dotsContainer');
+    let currentIndex = 0;
+    let totalSlides = slides.length;
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => { scrollToSlide(i); });
+            dotsContainer.appendChild(dot);
+        }
+        updateActiveDot();
+    }
+
+    function updateActiveDot() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            if (idx === currentIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function scrollToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentIndex = index;
+        const slideWidth = slides[0].clientWidth;
+        scrollContainer.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
+        updateActiveDot();
+    }
+
+    function nextSlide() {
+        if (currentIndex + 1 < totalSlides) scrollToSlide(currentIndex + 1);
+    }
+    function prevSlide() {
+        if (currentIndex - 1 >= 0) scrollToSlide(currentIndex - 1);
+    }
+
+    scrollContainer.addEventListener('scroll', () => {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const newIndex = Math.round(scrollContainer.scrollLeft / containerRect.width);
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalSlides) {
+            currentIndex = newIndex;
+            updateActiveDot();
+        }
+    });
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    window.addEventListener('resize', () => scrollToSlide(currentIndex));
+
+    createDots();
+    setTimeout(() => scrollToSlide(0), 100);
+</script>
+</body>
+</html>
