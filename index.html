@@ -1,21 +1,161 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
     <meta charset="UTF-8">
+
+    <!-- Responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Couleur navigateur mobile -->
     <meta name="theme-color" content="#16805C">
 
-    <title>Missing.CI — Retrouver. Alerter. Mobiliser.</title>
+    <!-- =========================================
+         SEO
+    ========================================== -->
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Missing.CI — Retrouver, Alerter, Mobiliser</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta name="description"
+          content="Missing.CI est une plateforme ivoirienne dédiée au signalement, à la centralisation et à la diffusion des informations concernant les personnes disparues en Côte d'Ivoire.">
+
+    <meta name="keywords"
+          content="Missing.CI, personnes disparues, disparition Côte d'Ivoire, retrouver personne disparue, signalement disparition, personnes recherchées, Côte d'Ivoire">
+
+    <meta name="author" content="Missing.CI">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="googlebot" content="index, follow">
+
+    <meta name="language" content="fr">
+
+    <meta name="geo.region" content="CI">
+
+    <meta name="geo.placename" content="Côte d'Ivoire">
+
+
+    <!-- =========================================
+         URL CANONIQUE
+    ========================================== -->
+
+    <link rel="canonical" href="https://missing.ci/">
+
+
+    <!-- =========================================
+         OPEN GRAPH
+         Facebook / WhatsApp / LinkedIn
+    ========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:site_name" content="Missing.CI">
+
+    <meta property="og:title"
+          content="Missing.CI — Retrouver, Alerter, Mobiliser">
+
+    <meta property="og:description"
+          content="Une plateforme ivoirienne dédiée à la centralisation et à la diffusion des signalements de personnes disparues.">
+
+    <meta property="og:url"
+          content="https://missing.ci/">
+
+    <meta property="og:image"
+          content="https://missing.ci/images/og-image.jpg">
+
+    <meta property="og:image:alt"
+          content="Missing.CI — Plateforme ivoirienne de signalement de personnes disparues">
+
+    <meta property="og:locale" content="fr_CI">
+
+
+    <!-- =========================================
+         TWITTER / X
+    ========================================== -->
+
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Missing.CI — Retrouver, Alerter, Mobiliser">
+
+    <meta name="twitter:description"
+          content="Plateforme ivoirienne dédiée au signalement et à la diffusion des informations concernant les personnes disparues.">
+
+    <meta name="twitter:image"
+          content="https://missing.ci/images/og-image.jpg">
+
+    <meta name="twitter:image:alt"
+          content="Missing.CI — Plateforme de signalement">
+
+
+    <!-- =========================================
+         FAVICON
+    ========================================== -->
+
+    <link rel="icon"
+          type="image/png"
+          href="images/logo.png">
+
+    <link rel="apple-touch-icon"
+          href="images/logo.png">
+
+
+    <!-- =========================================
+         GOOGLE FONTS
+    ========================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- =========================================
+         FONT AWESOME
+    ========================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- =========================================
+         DONNÉES STRUCTURÉES
+    ========================================== -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Missing.CI",
+        "alternateName": "Missing CI",
+        "url": "https://missing.ci/",
+        "description": "Plateforme ivoirienne dédiée au signalement, à la centralisation et à la diffusion des informations concernant les personnes disparues.",
+        "inLanguage": "fr-CI",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Missing.CI",
+            "url": "https://missing.ci/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://missing.ci/images/logo.png"
+            }
+        }
+    }
+    </script>
+
 
     <style>
+
+        /* =========================================
+           VARIABLES
+        ========================================== */
+
         :root {
             --green: #16805c;
             --green-dark: #0e6247;
@@ -36,6 +176,11 @@
             --radius: 24px;
             --container: 1180px;
         }
+
+
+        /* =========================================
+           RESET
+        ========================================== */
 
         * {
             margin: 0;
@@ -73,9 +218,10 @@
             margin: auto;
         }
 
+
         /* =========================================
            NAVIGATION
-        ========================================= */
+        ========================================== */
 
         .navbar {
             position: fixed;
@@ -84,13 +230,14 @@
             width: 100%;
             z-index: 1000;
             padding: 18px 0;
-            transition: all .3s ease;
+            transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
-            background: rgba(255,255,255,.90);
+            background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(18px);
-            box-shadow: 0 1px 0 rgba(20, 40, 30, .06);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 1px 0 rgba(20, 40, 30, 0.06);
             padding: 12px 0;
         }
 
@@ -124,13 +271,13 @@
             display: flex;
             align-items: center;
             gap: 32px;
-            font-size: .92rem;
+            font-size: 0.92rem;
             font-weight: 600;
             color: #526159;
         }
 
         .nav-links a {
-            transition: color .2s ease;
+            transition: color 0.2s ease;
         }
 
         .nav-links a:hover {
@@ -142,7 +289,7 @@
             color: white !important;
             padding: 11px 20px;
             border-radius: 100px;
-            box-shadow: 0 8px 20px rgba(22,128,92,.18);
+            box-shadow: 0 8px 20px rgba(22, 128, 92, 0.18);
         }
 
         .nav-button:hover {
@@ -162,9 +309,10 @@
             color: var(--text);
         }
 
+
         /* =========================================
            HERO
-        ========================================= */
+        ========================================== */
 
         .hero {
             min-height: 100vh;
@@ -172,8 +320,16 @@
             position: relative;
             overflow: hidden;
             background:
-                radial-gradient(circle at 85% 15%, rgba(22,128,92,.10), transparent 30%),
-                radial-gradient(circle at 5% 75%, rgba(112,194,153,.10), transparent 30%),
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(22, 128, 92, 0.10),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 5% 75%,
+                    rgba(112, 194, 153, 0.10),
+                    transparent 30%
+                ),
                 var(--cream);
         }
 
@@ -183,7 +339,7 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: rgba(22,128,92,.05);
+            background: rgba(22, 128, 92, 0.05);
             right: -250px;
             top: 100px;
             filter: blur(10px);
@@ -206,13 +362,13 @@
             color: var(--green-dark);
             padding: 8px 14px;
             border-radius: 100px;
-            font-size: .78rem;
+            font-size: 0.78rem;
             font-weight: 700;
             margin-bottom: 24px;
         }
 
         .eyebrow i {
-            font-size: .7rem;
+            font-size: 0.7rem;
         }
 
         .hero h1 {
@@ -251,8 +407,8 @@
             padding: 14px 22px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: .92rem;
-            transition: all .25s ease;
+            font-size: 0.92rem;
+            transition: all 0.25s ease;
             cursor: pointer;
             border: none;
         }
@@ -260,13 +416,13 @@
         .btn-primary {
             background: var(--green);
             color: white;
-            box-shadow: 0 12px 28px rgba(22,128,92,.20);
+            box-shadow: 0 12px 28px rgba(22, 128, 92, 0.20);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
             background: var(--green-dark);
-            box-shadow: 0 18px 35px rgba(22,128,92,.25);
+            box-shadow: 0 18px 35px rgba(22, 128, 92, 0.25);
         }
 
         .btn-secondary {
@@ -287,14 +443,17 @@
             gap: 10px;
             margin-top: 24px;
             color: #738078;
-            font-size: .84rem;
+            font-size: 0.84rem;
         }
 
         .hero-note i {
             color: var(--green);
         }
 
-        /* HERO VISUAL */
+
+        /* =========================================
+           HERO VISUAL
+        ========================================== */
 
         .hero-visual {
             position: relative;
@@ -305,7 +464,7 @@
             border-radius: 25px;
             padding: 10px;
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(20,60,40,.08);
+            border: 1px solid rgba(20, 60, 40, 0.08);
             transform: rotate(1.5deg);
             position: relative;
         }
@@ -383,26 +542,29 @@
 
         .floating-card strong {
             display: block;
-            font-size: .9rem;
+            font-size: 0.9rem;
         }
 
         .floating-card small {
             color: var(--text-light);
-            font-size: .72rem;
+            font-size: 0.72rem;
         }
 
         @keyframes float {
-            0%,100% {
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-8px);
             }
         }
 
+
         /* =========================================
            STATS
-        ========================================= */
+        ========================================== */
 
         .stats {
             padding: 25px 0 90px;
@@ -438,12 +600,13 @@
             display: block;
             margin-top: 5px;
             color: var(--text-light);
-            font-size: .85rem;
+            font-size: 0.85rem;
         }
 
+
         /* =========================================
-           SECTION HEADER
-        ========================================= */
+           SECTIONS
+        ========================================== */
 
         section {
             position: relative;
@@ -461,7 +624,7 @@
 
         .section-label {
             color: var(--green);
-            font-size: .78rem;
+            font-size: 0.78rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -482,9 +645,10 @@
             font-size: 1rem;
         }
 
+
         /* =========================================
            MISSION
-        ========================================= */
+        ========================================== */
 
         .mission {
             background: white;
@@ -492,7 +656,7 @@
 
         .mission-grid {
             display: grid;
-            grid-template-columns: .9fr 1.1fr;
+            grid-template-columns: 0.9fr 1.1fr;
             gap: 80px;
             align-items: center;
         }
@@ -536,7 +700,7 @@
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            font-size: .94rem;
+            font-size: 0.94rem;
             font-weight: 600;
         }
 
@@ -549,12 +713,13 @@
             border-radius: 50%;
             display: grid;
             place-items: center;
-            font-size: .7rem;
+            font-size: 0.7rem;
         }
+
 
         /* =========================================
            FEATURES
-        ========================================= */
+        ========================================== */
 
         .features {
             background: var(--cream);
@@ -571,7 +736,7 @@
             padding: 30px;
             border-radius: 20px;
             border: 1px solid var(--border);
-            transition: all .3s ease;
+            transition: all 0.3s ease;
         }
 
         .feature:hover {
@@ -601,12 +766,13 @@
         .feature p {
             color: var(--text-light);
             line-height: 1.65;
-            font-size: .9rem;
+            font-size: 0.9rem;
         }
+
 
         /* =========================================
            HOW IT WORKS
-        ========================================= */
+        ========================================== */
 
         .how {
             background: white;
@@ -635,7 +801,7 @@
             border-radius: 50%;
             font-family: "Manrope", sans-serif;
             font-weight: 800;
-            box-shadow: 0 10px 25px rgba(22,128,92,.18);
+            box-shadow: 0 10px 25px rgba(22, 128, 92, 0.18);
         }
 
         .step h3 {
@@ -646,12 +812,13 @@
         .step p {
             color: var(--text-light);
             line-height: 1.65;
-            font-size: .9rem;
+            font-size: 0.9rem;
         }
+
 
         /* =========================================
            SCREENSHOTS
-        ========================================= */
+        ========================================== */
 
         .screenshots {
             background: var(--green-soft);
@@ -683,7 +850,7 @@
             padding: 10px;
             border-radius: 20px;
             box-shadow: var(--shadow-md);
-            border: 1px solid rgba(20,60,40,.06);
+            border: 1px solid rgba(20, 60, 40, 0.06);
         }
 
         .showcase-image img {
@@ -720,7 +887,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: .88rem;
+            font-size: 0.88rem;
             font-weight: 600;
         }
 
@@ -728,9 +895,10 @@
             color: var(--green);
         }
 
+
         /* =========================================
-           MAP / COMMUNITY
-        ========================================= */
+           COMMUNITY
+        ========================================== */
 
         .community {
             background: white;
@@ -742,7 +910,7 @@
             padding: 70px;
             color: white;
             display: grid;
-            grid-template-columns: 1fr .8fr;
+            grid-template-columns: 1fr 0.8fr;
             gap: 60px;
             align-items: center;
             overflow: hidden;
@@ -754,7 +922,7 @@
             position: absolute;
             width: 400px;
             height: 400px;
-            border: 1px solid rgba(255,255,255,.12);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 50%;
             right: -150px;
             top: -150px;
@@ -770,7 +938,7 @@
         }
 
         .community-box p {
-            color: rgba(255,255,255,.78);
+            color: rgba(255, 255, 255, 0.78);
             line-height: 1.75;
             max-width: 600px;
             position: relative;
@@ -784,13 +952,14 @@
 
         .community-image img {
             border-radius: 18px;
-            box-shadow: 0 25px 60px rgba(0,0,0,.18);
-            border: 4px solid rgba(255,255,255,.15);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+            border: 4px solid rgba(255, 255, 255, 0.15);
         }
+
 
         /* =========================================
            ABOUT
-        ========================================= */
+        ========================================== */
 
         .about {
             background: var(--cream);
@@ -827,9 +996,10 @@
             border-radius: 17px;
         }
 
+
         /* =========================================
-           FINAL CTA
-        ========================================= */
+           CTA
+        ========================================== */
 
         .cta {
             padding: 110px 0;
@@ -838,7 +1008,11 @@
 
         .cta-box {
             text-align: center;
-            background: linear-gradient(135deg, #eef9f3, #f8fcfa);
+            background: linear-gradient(
+                135deg,
+                #eef9f3,
+                #f8fcfa
+            );
             border: 1px solid #dbece2;
             border-radius: 30px;
             padding: 80px 30px;
@@ -858,7 +1032,7 @@
 
         .cta-box h2 {
             font-family: "Manrope", sans-serif;
-            font-size: clamp(2rem,4vw,3.2rem);
+            font-size: clamp(2rem, 4vw, 3.2rem);
             line-height: 1.1;
             margin-bottom: 18px;
             letter-spacing: -1px;
@@ -871,9 +1045,10 @@
             line-height: 1.7;
         }
 
+
         /* =========================================
            FOOTER
-        ========================================= */
+        ========================================== */
 
         footer {
             background: #12251d;
@@ -886,7 +1061,7 @@
             grid-template-columns: 1.3fr 1fr 1fr;
             gap: 50px;
             padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,.10);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
         }
 
         .footer-brand {
@@ -910,23 +1085,23 @@
         }
 
         .footer-brand p {
-            color: rgba(255,255,255,.55);
+            color: rgba(255, 255, 255, 0.55);
             line-height: 1.7;
-            font-size: .88rem;
+            font-size: 0.88rem;
         }
 
         .footer-col h4 {
             font-family: "Manrope", sans-serif;
-            font-size: .9rem;
+            font-size: 0.9rem;
             margin-bottom: 18px;
         }
 
         .footer-col a {
             display: block;
-            color: rgba(255,255,255,.55);
+            color: rgba(255, 255, 255, 0.55);
             margin-bottom: 10px;
-            font-size: .85rem;
-            transition: color .2s;
+            font-size: 0.85rem;
+            transition: color 0.2s;
         }
 
         .footer-col a:hover {
@@ -935,21 +1110,24 @@
 
         .copyright {
             padding-top: 22px;
-            color: rgba(255,255,255,.4);
-            font-size: .78rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.78rem;
             display: flex;
             justify-content: space-between;
             gap: 20px;
         }
 
+
         /* =========================================
            SCROLL REVEAL
-        ========================================= */
+        ========================================== */
 
         .reveal {
             opacity: 0;
             transform: translateY(35px);
-            transition: opacity .8s ease, transform .8s ease;
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
         }
 
         .reveal.visible {
@@ -957,9 +1135,10 @@
             transform: translateY(0);
         }
 
+
         /* =========================================
            MOBILE MENU
-        ========================================= */
+        ========================================== */
 
         @media (max-width: 850px) {
 
@@ -1046,6 +1225,11 @@
             }
         }
 
+
+        /* =========================================
+           PETITS ÉCRANS
+        ========================================== */
+
         @media (max-width: 600px) {
 
             .container {
@@ -1080,7 +1264,7 @@
             }
 
             .floating-card {
-                transform: scale(.85);
+                transform: scale(0.85);
             }
 
             .floating-card.one {
@@ -1144,1112 +1328,1608 @@
                 flex-direction: column;
             }
         }
+
+
+        /* =========================================
+           ACCESSIBILITÉ
+        ========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================================
-     NAVIGATION
-========================================= -->
 
-<header class="navbar" id="navbar">
-    <div class="container nav-inner">
+    <!-- =========================================
+         NAVIGATION
+    ========================================== -->
 
-        <a href="#accueil" class="logo">
-            <img src="images/logo.png" alt="Missing CI">
-            <div class="logo-text">
-                Missing<span>.CI</span>
-            </div>
-        </a>
+    <header class="navbar" id="navbar">
 
-        <nav class="nav-links" id="navLinks">
-            <a href="#mission">Notre mission</a>
-            <a href="#fonctionnalites">Fonctionnalités</a>
-            <a href="#plateforme">La plateforme</a>
-            <a href="#apropos">À propos</a>
-            <a href="#contact" class="nav-button">Signaler une disparition</a>
-        </nav>
+        <div class="container nav-inner">
 
-        <button class="menu-button" id="menuButton" aria-label="Menu">
-            <i class="fas fa-bars"></i>
-        </button>
+            <a href="#accueil" class="logo">
 
-    </div>
-</header>
+                <img
+                    src="images/logo.png"
+                    alt="Logo Missing.CI"
+                >
+
+                <div class="logo-text">
+                    Missing<span>.CI</span>
+                </div>
+
+            </a>
 
 
-<!-- =========================================
-     HERO
-========================================= -->
+            <nav class="nav-links" id="navLinks">
 
-<main>
-
-<section class="hero" id="accueil">
-
-    <div class="container hero-grid">
-
-        <div class="hero-content reveal">
-
-            <div class="eyebrow">
-                <i class="fas fa-heart"></i>
-                Une initiative ivoirienne
-            </div>
-
-            <h1>
-                Retrouver.<br>
-                <span>Alerter.</span><br>
-                Mobiliser.
-            </h1>
-
-            <p class="hero-description">
-                Missing.CI est une plateforme dédiée à la centralisation
-                et à la diffusion des signalements de personnes disparues
-                en Côte d’Ivoire.
-            </p>
-
-            <div class="hero-actions">
-                <a href="#plateforme" class="btn btn-primary">
-                    Découvrir la plateforme
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-
-                <a href="#mission" class="btn btn-secondary">
+                <a href="#mission">
                     Notre mission
                 </a>
-            </div>
 
-            <div class="hero-note">
-                <i class="fas fa-shield-halved"></i>
-                Une technologie au service de la solidarité citoyenne.
-            </div>
+                <a href="#fonctionnalites">
+                    Fonctionnalités
+                </a>
 
-        </div>
+                <a href="#plateforme">
+                    La plateforme
+                </a>
 
+                <a href="#apropos">
+                    À propos
+                </a>
 
-        <div class="hero-visual reveal">
+                <a href="#contact" class="nav-button">
+                    Signaler une disparition
+                </a>
 
-            <div class="hero-window">
-
-                <div class="window-bar">
-                    <span class="window-dot"></span>
-                    <span class="window-dot"></span>
-                    <span class="window-dot"></span>
-                    <div class="window-url"></div>
-                </div>
-
-                <div class="hero-screen">
-                    <img src="images/acceuil.png" alt="Interface Missing CI">
-                </div>
-
-            </div>
+            </nav>
 
 
-            <div class="floating-card one">
+            <button
+                class="menu-button"
+                id="menuButton"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+                type="button"
+            >
 
-                <div class="floating-icon">
-                    <i class="fas fa-bullhorn"></i>
-                </div>
+                <i class="fas fa-bars"></i>
 
-                <div>
-                    <strong>Signalement rapide</strong>
-                    <small>Quelques étapes seulement</small>
-                </div>
-
-            </div>
-
-
-            <div class="floating-card two">
-
-                <div class="floating-icon">
-                    <i class="fas fa-location-dot"></i>
-                </div>
-
-                <div>
-                    <strong>Carte interactive</strong>
-                    <small>Localiser les signalements</small>
-                </div>
-
-            </div>
+            </button>
 
         </div>
 
-    </div>
+    </header>
 
-</section>
 
+    <!-- =========================================
+         CONTENU PRINCIPAL
+    ========================================== -->
 
-<!-- =========================================
-     STATS
-========================================= -->
+    <main>
 
-<section class="stats">
 
-    <div class="container">
+        <!-- =========================================
+             HERO
+        ========================================== -->
 
-        <div class="stats-grid reveal">
+        <section class="hero" id="accueil">
 
-            <div class="stat">
-                <strong>24/7</strong>
-                <span>Plateforme accessible</span>
-            </div>
+            <div class="container hero-grid">
 
-            <div class="stat">
-                <strong>1</strong>
-                <span>Point centralisé pour les signalements</span>
-            </div>
 
-            <div class="stat">
-                <strong>100%</strong>
-                <span>Mobilisation citoyenne</span>
-            </div>
+                <div class="hero-content reveal">
 
-        </div>
+                    <div class="eyebrow">
 
-    </div>
+                        <i class="fas fa-heart"></i>
 
-</section>
+                        Une initiative ivoirienne
 
-
-<!-- =========================================
-     MISSION
-========================================= -->
-
-<section class="section mission" id="mission">
-
-    <div class="container mission-grid">
-
-        <div class="mission-image reveal">
-            <img src="images/apropos.png" alt="À propos de Missing CI">
-        </div>
-
-        <div class="mission-content reveal">
-
-            <div class="section-label">Notre mission</div>
-
-            <h2>
-                La technologie peut
-                <span>rapprocher</span>
-                les familles.
-            </h2>
-
-            <p>
-                Lorsqu'une personne disparaît, chaque minute compte.
-                Pourtant, les informations peuvent être dispersées entre
-                différents réseaux sociaux, affiches et messages.
-            </p>
-
-            <p>
-                Missing.CI propose un espace centralisé permettant de
-                structurer les informations, faciliter leur diffusion
-                et encourager la participation de la communauté.
-            </p>
-
-            <div class="check-list">
-
-                <div class="check">
-                    <i class="fas fa-check"></i>
-                    <span>Centraliser les signalements</span>
-                </div>
-
-                <div class="check">
-                    <i class="fas fa-check"></i>
-                    <span>Faciliter la diffusion des informations</span>
-                </div>
-
-                <div class="check">
-                    <i class="fas fa-check"></i>
-                    <span>Encourager les témoignages citoyens</span>
-                </div>
-
-                <div class="check">
-                    <i class="fas fa-check"></i>
-                    <span>Utiliser la cartographie pour mieux localiser</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     FONCTIONNALITES
-========================================= -->
-
-<section class="section features" id="fonctionnalites">
-
-    <div class="container">
-
-        <div class="section-header reveal">
-
-            <div class="section-label">
-                Fonctionnalités
-            </div>
-
-            <h2 class="section-title">
-                Tout ce qu'il faut pour
-                mieux rechercher.
-            </h2>
-
-            <p class="section-description">
-                Une plateforme pensée pour les familles, les citoyens
-                et toutes les personnes souhaitant contribuer aux recherches.
-            </p>
-
-        </div>
-
-
-        <div class="feature-grid">
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-file-circle-plus"></i>
-                </div>
-
-                <h3>Signalement</h3>
-
-                <p>
-                    Créez rapidement un dossier avec les informations
-                    essentielles concernant une personne disparue.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-image"></i>
-                </div>
-
-                <h3>Dossier complet</h3>
-
-                <p>
-                    Photo, description, date, lieu, signes distinctifs
-                    et informations utiles sont regroupés au même endroit.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-map-location-dot"></i>
-                </div>
-
-                <h3>Carte interactive</h3>
-
-                <p>
-                    Visualisez les signalements sur une carte afin
-                    de mieux comprendre leur localisation.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-filter"></i>
-                </div>
-
-                <h3>Recherche avancée</h3>
-
-                <p>
-                    Filtrez les dossiers par région, âge, date ou
-                    statut afin de retrouver plus facilement une information.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-share-nodes"></i>
-                </div>
-
-                <h3>Partage instantané</h3>
-
-                <p>
-                    Diffusez facilement un dossier grâce à un lien unique
-                    partageable sur les réseaux sociaux et messageries.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-comments"></i>
-                </div>
-
-                <h3>Témoignages</h3>
-
-                <p>
-                    Les citoyens peuvent transmettre des informations
-                    susceptibles d'aider les recherches.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-print"></i>
-                </div>
-
-                <h3>Affiches personnalisées</h3>
-
-                <p>
-                    Générez rapidement un visuel prêt à être diffusé
-                    ou imprimé dans les lieux publics.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-
-                <h3>Espace personnel</h3>
-
-                <p>
-                    Retrouvez vos signalements, vos informations et
-                    les activités liées à votre compte.
-                </p>
-            </div>
-
-
-            <div class="feature reveal">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-simple"></i>
-                </div>
-
-                <h3>Tableau de bord</h3>
-
-                <p>
-                    Consultez les statistiques et suivez facilement
-                    l'évolution de vos signalements.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     COMMENT ÇA MARCHE
-========================================= -->
-
-<section class="section how">
-
-    <div class="container">
-
-        <div class="section-header reveal">
-
-            <div class="section-label">
-                Comment ça marche ?
-            </div>
-
-            <h2 class="section-title">
-                Signaler en quelques étapes.
-            </h2>
-
-            <p class="section-description">
-                Missing.CI simplifie le processus pour permettre
-                à chacun de contribuer rapidement.
-            </p>
-
-        </div>
-
-
-        <div class="steps">
-
-            <div class="step reveal">
-
-                <div class="step-number">01</div>
-
-                <h3>Créer un signalement</h3>
-
-                <p>
-                    Renseignez les informations disponibles et ajoutez
-                    une photo de la personne recherchée.
-                </p>
-
-            </div>
-
-
-            <div class="step reveal">
-
-                <div class="step-number">02</div>
-
-                <h3>Diffuser l'information</h3>
-
-                <p>
-                    Le dossier peut être partagé facilement afin
-                    d'augmenter sa visibilité.
-                </p>
-
-            </div>
-
-
-            <div class="step reveal">
-
-                <div class="step-number">03</div>
-
-                <h3>Mobiliser la communauté</h3>
-
-                <p>
-                    Les citoyens peuvent consulter le dossier et
-                    transmettre des informations utiles.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     PLATEFORME
-========================================= -->
-
-<section class="section screenshots" id="plateforme">
-
-    <div class="container">
-
-        <div class="section-header reveal">
-
-            <div class="section-label">
-                La plateforme
-            </div>
-
-            <h2 class="section-title">
-                Une expérience simple,
-                pensée pour l'action.
-            </h2>
-
-            <p class="section-description">
-                Découvrez les principales interfaces de Missing.CI.
-            </p>
-
-        </div>
-
-
-        <!-- ACCUEIL -->
-
-        <div class="showcase reveal">
-
-            <div class="showcase-image">
-                <img src="images/acceuil.png" alt="Accueil Missing CI">
-            </div>
-
-            <div class="showcase-content">
-
-                <div class="section-label">
-                    Interface principale
-                </div>
-
-                <h2>
-                    Une vue d'ensemble
-                    dès le premier regard.
-                </h2>
-
-                <p>
-                    La page d'accueil permet d'accéder rapidement aux
-                    différentes fonctionnalités de la plateforme et
-                    de découvrir les derniers signalements.
-                </p>
-
-                <div class="mini-list">
-
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Derniers signalements
                     </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Actions rapides
+
+                    <h1>
+
+                        Retrouver.<br>
+
+                        <span>Alerter.</span><br>
+
+                        Mobiliser.
+
+                    </h1>
+
+
+                    <p class="hero-description">
+
+                        Missing.CI est une plateforme dédiée à la
+                        centralisation et à la diffusion des signalements
+                        de personnes disparues en Côte d’Ivoire.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="#plateforme"
+                            class="btn btn-primary"
+                        >
+
+                            Découvrir la plateforme
+
+                            <i class="fas fa-arrow-right"></i>
+
+                        </a>
+
+
+                        <a
+                            href="#mission"
+                            class="btn btn-secondary"
+                        >
+
+                            Notre mission
+
+                        </a>
+
                     </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Accès aux recherches
+
+                    <div class="hero-note">
+
+                        <i class="fas fa-shield-halved"></i>
+
+                        Une technologie au service
+                        de la solidarité citoyenne.
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="hero-visual reveal">
+
+                    <div class="hero-window">
+
+                        <div class="window-bar">
+
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+                            <span class="window-dot"></span>
+
+                            <div class="window-url"></div>
+
+                        </div>
+
+
+                        <div class="hero-screen">
+
+                            <img
+                                src="images/acceuil.png"
+                                alt="Interface principale de Missing.CI"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card one">
+
+                        <div class="floating-icon">
+
+                            <i class="fas fa-bullhorn"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Signalement rapide
+                            </strong>
+
+                            <small>
+                                Quelques étapes seulement
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card two">
+
+                        <div class="floating-icon">
+
+                            <i class="fas fa-location-dot"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Carte interactive
+                            </strong>
+
+                            <small>
+                                Localiser les signalements
+                            </small>
+
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
 
-        <!-- FORMULAIRE -->
+        <!-- =========================================
+             STATS
+        ========================================== -->
 
-        <div class="showcase reverse reveal">
+        <section class="stats">
 
-            <div class="showcase-image">
-                <img src="images/signalementform.png" alt="Formulaire de signalement">
-            </div>
+            <div class="container">
 
-            <div class="showcase-content">
+                <div class="stats-grid reveal">
 
-                <div class="section-label">
-                    Signalement
-                </div>
+                    <div class="stat">
 
-                <h2>
-                    Transformer une information
-                    en dossier structuré.
-                </h2>
+                        <strong>24/7</strong>
 
-                <p>
-                    Le formulaire rassemble les informations essentielles
-                    pour créer un signalement clair et exploitable.
-                </p>
+                        <span>
+                            Plateforme accessible
+                        </span>
 
-                <div class="mini-list">
-
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Informations personnelles
                     </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Photo de la personne
+
+                    <div class="stat">
+
+                        <strong>1</strong>
+
+                        <span>
+                            Point centralisé pour les signalements
+                        </span>
+
                     </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Lieu et date de disparition
-                    </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Signes distinctifs
+                    <div class="stat">
+
+                        <strong>100%</strong>
+
+                        <span>
+                            Mobilisation citoyenne
+                        </span>
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
 
-        <!-- ARCHIVES -->
+        <!-- =========================================
+             MISSION
+        ========================================== -->
 
-        <div class="showcase reveal">
+        <section
+            class="section mission"
+            id="mission"
+        >
 
-            <div class="showcase-image">
-                <img src="images/archive.png" alt="Archives Missing CI">
-            </div>
+            <div class="container mission-grid">
 
-            <div class="showcase-content">
 
-                <div class="section-label">
-                    Archives
-                </div>
+                <div class="mission-image reveal">
 
-                <h2>
-                    Retrouver rapidement
-                    un dossier.
-                </h2>
-
-                <p>
-                    Les archives regroupent les dossiers enregistrés
-                    sur la plateforme. La recherche et les filtres
-                    permettent de retrouver une personne plus facilement.
-                </p>
-
-                <div class="mini-list">
-
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Recherche par nom
-                    </div>
-
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Filtres par statut
-                    </div>
-
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Filtres géographiques
-                    </div>
+                    <img
+                        src="images/apropos.png"
+                        alt="À propos de Missing.CI"
+                        loading="lazy"
+                    >
 
                 </div>
 
-            </div>
 
-        </div>
+                <div class="mission-content reveal">
 
-
-        <!-- DETAIL -->
-
-        <div class="showcase reverse reveal">
-
-            <div class="showcase-image">
-                <img src="images/detaildisparition.png" alt="Détail d'une disparition">
-            </div>
-
-            <div class="showcase-content">
-
-                <div class="section-label">
-                    Fiche individuelle
-                </div>
-
-                <h2>
-                    Toutes les informations
-                    réunies au même endroit.
-                </h2>
-
-                <p>
-                    Chaque personne dispose d'une fiche dédiée regroupant
-                    les informations importantes permettant de faciliter
-                    son identification.
-                </p>
-
-                <div class="mini-list">
-
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Photo et informations personnelles
+                    <div class="section-label">
+                        Notre mission
                     </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Chronologie
-                    </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Témoignages
-                    </div>
+                    <h2>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Partage du dossier
-                    </div>
+                        La technologie peut
+                        <span>rapprocher</span>
+                        les familles.
 
-                </div>
-
-            </div>
-
-        </div>
+                    </h2>
 
 
-        <!-- CARTE -->
+                    <p>
 
-        <div class="showcase reveal">
+                        Lorsqu’une personne disparaît,
+                        chaque minute compte.
+                        Pourtant, les informations peuvent être
+                        dispersées entre différents réseaux sociaux,
+                        affiches et messages.
 
-            <div class="showcase-image">
-                <img src="images/carte.png" alt="Carte interactive Missing CI">
-            </div>
+                    </p>
 
-            <div class="showcase-content">
 
-                <div class="section-label">
-                    Cartographie
-                </div>
+                    <p>
 
-                <h2>
-                    Voir les signalements
-                    sur une carte.
-                </h2>
+                        Missing.CI propose un espace centralisé
+                        permettant de structurer les informations,
+                        faciliter leur diffusion et encourager
+                        la participation de la communauté.
 
-                <p>
-                    La cartographie interactive permet de visualiser
-                    les différents signalements et leur localisation.
-                </p>
+                    </p>
 
-                <div class="mini-list">
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Localisation géographique
-                    </div>
+                    <div class="check-list">
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Points interactifs
-                    </div>
 
-                    <div>
-                        <i class="fas fa-check"></i>
-                        Accès direct aux dossiers
+                        <div class="check">
+
+                            <i class="fas fa-check"></i>
+
+                            <span>
+                                Centraliser les signalements
+                            </span>
+
+                        </div>
+
+
+                        <div class="check">
+
+                            <i class="fas fa-check"></i>
+
+                            <span>
+                                Faciliter la diffusion des informations
+                            </span>
+
+                        </div>
+
+
+                        <div class="check">
+
+                            <i class="fas fa-check"></i>
+
+                            <span>
+                                Encourager les témoignages citoyens
+                            </span>
+
+                        </div>
+
+
+                        <div class="check">
+
+                            <i class="fas fa-check"></i>
+
+                            <span>
+                                Utiliser la cartographie pour mieux localiser
+                            </span>
+
+                        </div>
+
+
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
 
-        <!-- AFFICHES -->
+        <!-- =========================================
+             FONCTIONNALITÉS
+        ========================================== -->
 
-        <div class="showcase reverse reveal">
+        <section
+            class="section features"
+            id="fonctionnalites"
+        >
 
-            <div class="showcase-image">
-                <img src="images/affiche.png" alt="Affiche Missing CI">
-            </div>
+            <div class="container">
 
-            <div class="showcase-content">
 
-                <div class="section-label">
-                    Diffusion
-                </div>
+                <div class="section-header reveal">
 
-                <h2>
-                    Une affiche prête
-                    à être partagée.
-                </h2>
+                    <div class="section-label">
+                        Fonctionnalités
+                    </div>
 
-                <p>
-                    Chaque signalement peut être transformé en visuel
-                    afin de faciliter sa diffusion sur les réseaux sociaux,
-                    dans les groupes communautaires ou dans les espaces publics.
-                </p>
+                    <h2 class="section-title">
 
-            </div>
+                        Tout ce qu’il faut pour
+                        mieux rechercher.
 
-        </div>
+                    </h2>
 
-    </div>
+                    <p class="section-description">
 
-</section>
+                        Une plateforme pensée pour les familles,
+                        les citoyens et toutes les personnes
+                        souhaitant contribuer aux recherches.
 
-
-<!-- =========================================
-     COMMUNAUTE
-========================================= -->
-
-<section class="section community">
-
-    <div class="container">
-
-        <div class="community-box reveal">
-
-            <div>
-
-                <div class="section-label" style="color:#b8ecd5;">
-                    Mobilisation citoyenne
-                </div>
-
-                <h2>
-                    Une personne disparue
-                    concerne toute une communauté.
-                </h2>
-
-                <p>
-                    Un partage, une information, un témoignage ou un simple
-                    regard attentif peut parfois faire la différence.
-                    Missing.CI veut faciliter cette mobilisation grâce à
-                    une information structurée et accessible.
-                </p>
-
-            </div>
-
-            <div class="community-image">
-
-                <img src="images/commentiare.png" alt="Participation citoyenne">
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     A PROPOS
-========================================= -->
-
-<section class="section about" id="apropos">
-
-    <div class="container about-grid">
-
-        <div class="about-content reveal">
-
-            <div class="section-label">
-                À propos du projet
-            </div>
-
-            <h2>
-                Une solution numérique
-                pensée pour la Côte d'Ivoire.
-            </h2>
-
-            <p>
-                Missing.CI est un projet conçu pour répondre à un besoin
-                concret : améliorer la centralisation et la diffusion
-                des informations relatives aux personnes disparues.
-            </p>
-
-            <p>
-                L'objectif est de créer progressivement un écosystème
-                numérique capable de rapprocher les familles, les citoyens
-                et les acteurs impliqués dans les recherches.
-            </p>
-
-            <a href="#contact" class="btn btn-primary">
-                Découvrir le projet
-                <i class="fas fa-arrow-right"></i>
-            </a>
-
-        </div>
-
-
-        <div class="about-card reveal">
-
-            <img src="images/dashboarduser.png" alt="Tableau de bord Missing CI">
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     CTA
-========================================= -->
-
-<section class="cta" id="contact">
-
-    <div class="container">
-
-        <div class="cta-box reveal">
-
-            <div class="icon">
-                <i class="fas fa-magnifying-glass"></i>
-            </div>
-
-            <h2>
-                Chaque information<br>
-                peut compter.
-            </h2>
-
-            <p>
-                Ensemble, utilisons la technologie pour mieux diffuser
-                les signalements et renforcer la mobilisation autour
-                des personnes disparues.
-            </p>
-
-            <a href="#" class="btn btn-primary">
-                Signaler une disparition
-                <i class="fas fa-arrow-right"></i>
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- =========================================
-     FOOTER
-========================================= -->
-
-<footer>
-
-    <div class="container">
-
-        <div class="footer-grid">
-
-            <div class="footer-brand">
-
-                <div class="footer-logo">
-
-                    <img src="images/logo.png" alt="Missing CI">
-
-                    <span>Missing.CI</span>
+                    </p>
 
                 </div>
 
-                <p>
-                    Une plateforme ivoirienne dédiée à la centralisation,
-                    la diffusion et la mobilisation autour des signalements
-                    de personnes disparues.
-                </p>
+
+                <div class="feature-grid">
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-file-circle-plus"></i>
+                        </div>
+
+                        <h3>
+                            Signalement
+                        </h3>
+
+                        <p>
+                            Créez rapidement un dossier avec les
+                            informations essentielles concernant
+                            une personne disparue.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+
+                        <h3>
+                            Dossier complet
+                        </h3>
+
+                        <p>
+                            Photo, description, date, lieu,
+                            signes distinctifs et informations
+                            utiles sont regroupés au même endroit.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-map-location-dot"></i>
+                        </div>
+
+                        <h3>
+                            Carte interactive
+                        </h3>
+
+                        <p>
+                            Visualisez les signalements sur une carte
+                            afin de mieux comprendre leur localisation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-filter"></i>
+                        </div>
+
+                        <h3>
+                            Recherche avancée
+                        </h3>
+
+                        <p>
+                            Filtrez les dossiers par région, âge,
+                            date ou statut afin de retrouver plus
+                            facilement une information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-share-nodes"></i>
+                        </div>
+
+                        <h3>
+                            Partage instantané
+                        </h3>
+
+                        <p>
+                            Diffusez facilement un dossier grâce à
+                            un lien unique partageable sur les
+                            réseaux sociaux et messageries.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+
+                        <h3>
+                            Témoignages
+                        </h3>
+
+                        <p>
+                            Les citoyens peuvent transmettre des
+                            informations susceptibles d’aider
+                            les recherches.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-print"></i>
+                        </div>
+
+                        <h3>
+                            Affiches personnalisées
+                        </h3>
+
+                        <p>
+                            Générez rapidement un visuel prêt à être
+                            diffusé ou imprimé dans les lieux publics.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+
+                        <h3>
+                            Espace personnel
+                        </h3>
+
+                        <p>
+                            Retrouvez vos signalements, vos informations
+                            et les activités liées à votre compte.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-simple"></i>
+                        </div>
+
+                        <h3>
+                            Tableau de bord
+                        </h3>
+
+                        <p>
+                            Consultez les statistiques et suivez
+                            facilement l’évolution de vos signalements.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             COMMENT ÇA MARCHE
+        ========================================== -->
+
+        <section class="section how">
+
+            <div class="container">
+
+
+                <div class="section-header reveal">
+
+                    <div class="section-label">
+                        Comment ça marche ?
+                    </div>
+
+                    <h2 class="section-title">
+                        Signaler en quelques étapes.
+                    </h2>
+
+                    <p class="section-description">
+
+                        Missing.CI simplifie le processus pour permettre
+                        à chacun de contribuer rapidement.
+
+                    </p>
+
+                </div>
+
+
+                <div class="steps">
+
+
+                    <div class="step reveal">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Créer un signalement
+                        </h3>
+
+                        <p>
+                            Renseignez les informations disponibles
+                            et ajoutez une photo de la personne recherchée.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step reveal">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <h3>
+                            Diffuser l’information
+                        </h3>
+
+                        <p>
+                            Le dossier peut être partagé facilement
+                            afin d’augmenter sa visibilité.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step reveal">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Mobiliser la communauté
+                        </h3>
+
+                        <p>
+                            Les citoyens peuvent consulter le dossier
+                            et transmettre des informations utiles.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             PLATEFORME
+        ========================================== -->
+
+        <section
+            class="section screenshots"
+            id="plateforme"
+        >
+
+            <div class="container">
+
+
+                <div class="section-header reveal">
+
+                    <div class="section-label">
+                        La plateforme
+                    </div>
+
+                    <h2 class="section-title">
+
+                        Une expérience simple,
+                        pensée pour l’action.
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        Découvrez les principales interfaces
+                        de Missing.CI.
+
+                    </p>
+
+                </div>
+
+
+                <!-- ACCUEIL -->
+
+                <div class="showcase reveal">
+
+                    <div class="showcase-image">
+
+                        <img
+                            src="images/acceuil.png"
+                            alt="Accueil Missing.CI"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="showcase-content">
+
+                        <div class="section-label">
+                            Interface principale
+                        </div>
+
+                        <h2>
+                            Une vue d’ensemble
+                            dès le premier regard.
+                        </h2>
+
+                        <p>
+                            La page d’accueil permet d’accéder rapidement
+                            aux différentes fonctionnalités de la plateforme
+                            et de découvrir les derniers signalements.
+                        </p>
+
+
+                        <div class="mini-list">
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Derniers signalements
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Actions rapides
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Accès aux recherches
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMULAIRE -->
+
+                <div class="showcase reverse reveal">
+
+                    <div class="showcase-image">
+
+                        <img
+                            src="images/signalementform.png"
+                            alt="Formulaire de signalement Missing.CI"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="showcase-content">
+
+                        <div class="section-label">
+                            Signalement
+                        </div>
+
+                        <h2>
+                            Transformer une information
+                            en dossier structuré.
+                        </h2>
+
+                        <p>
+                            Le formulaire rassemble les informations
+                            essentielles pour créer un signalement
+                            clair et exploitable.
+                        </p>
+
+
+                        <div class="mini-list">
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Informations personnelles
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Photo de la personne
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Lieu et date de disparition
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Signes distinctifs
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ARCHIVES -->
+
+                <div class="showcase reveal">
+
+                    <div class="showcase-image">
+
+                        <img
+                            src="images/archive.png"
+                            alt="Archives Missing.CI"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="showcase-content">
+
+                        <div class="section-label">
+                            Archives
+                        </div>
+
+                        <h2>
+                            Retrouver rapidement
+                            un dossier.
+                        </h2>
+
+                        <p>
+                            Les archives regroupent les dossiers enregistrés
+                            sur la plateforme. La recherche et les filtres
+                            permettent de retrouver une personne plus facilement.
+                        </p>
+
+
+                        <div class="mini-list">
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Recherche par nom
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Filtres par statut
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Filtres géographiques
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DETAIL -->
+
+                <div class="showcase reverse reveal">
+
+                    <div class="showcase-image">
+
+                        <img
+                            src="images/detaildisparition.png"
+                            alt="Détail d’une disparition"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="showcase-content">
+
+                        <div class="section-label">
+                            Fiche individuelle
+                        </div>
+
+                        <h2>
+                            Toutes les informations
+                            réunies au même endroit.
+                        </h2>
+
+                        <p>
+                            Chaque personne dispose d’une fiche dédiée
+                            regroupant les informations importantes permettant
+                            de faciliter son identification.
+                        </p>
+
+
+                        <div class="mini-list">
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Photo et informations personnelles
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Chronologie
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Témoignages
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Partage du dossier
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARTE -->
+
+                <div class="showcase reveal">
+
+                    <div class="showcase-image">
+
+                        <img
+                            src="images/carte.png"
+                            alt="Carte interactive Missing.CI"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="showcase-content">
+
+                        <div class="section-label">
+                            Cartographie
+                        </div>
+
+                        <h2>
+                            Voir les signalements
+                            sur une carte.
+                        </h2>
+
+                        <p>
+                            La cartographie interactive permet de visualiser
+                            les différents signalements et leur localisation.
+                        </p>
+
+
+                        <div class="mini-list">
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Localisation géographique
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Points interactifs
+                            </div>
+
+                            <div>
+                                <i class="fas fa-check"></i>
+                                Accès direct aux dossiers
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AFFICHES -->
+
+                <div class="showcase reverse reveal">
+
+                    <div class="showcase-image">
+
+                        <img
+                            src="images/affiche.png"
+                            alt="Affiche Missing.CI"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="showcase-content">
+
+                        <div class="section-label">
+                            Diffusion
+                        </div>
+
+                        <h2>
+                            Une affiche prête
+                            à être partagée.
+                        </h2>
+
+                        <p>
+                            Chaque signalement peut être transformé en visuel
+                            afin de faciliter sa diffusion sur les réseaux sociaux,
+                            dans les groupes communautaires ou dans les espaces publics.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             COMMUNAUTÉ
+        ========================================== -->
+
+        <section class="section community">
+
+            <div class="container">
+
+                <div class="community-box reveal">
+
+
+                    <div>
+
+                        <div
+                            class="section-label"
+                            style="color: #b8ecd5;"
+                        >
+                            Mobilisation citoyenne
+                        </div>
+
+
+                        <h2>
+                            Une personne disparue
+                            concerne toute une communauté.
+                        </h2>
+
+
+                        <p>
+                            Un partage, une information, un témoignage
+                            ou un simple regard attentif peut parfois
+                            faire la différence.
+
+                            Missing.CI veut faciliter cette mobilisation
+                            grâce à une information structurée et accessible.
+                        </p>
+
+                    </div>
+
+
+                    <div class="community-image">
+
+                        <img
+                            src="images/commentiare.png"
+                            alt="Participation citoyenne sur Missing.CI"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             À PROPOS
+        ========================================== -->
+
+        <section
+            class="section about"
+            id="apropos"
+        >
+
+            <div class="container about-grid">
+
+
+                <div class="about-content reveal">
+
+                    <div class="section-label">
+                        À propos du projet
+                    </div>
+
+
+                    <h2>
+                        Une solution numérique
+                        pensée pour la Côte d’Ivoire.
+                    </h2>
+
+
+                    <p>
+                        Missing.CI est un projet conçu pour répondre
+                        à un besoin concret : améliorer la centralisation
+                        et la diffusion des informations relatives
+                        aux personnes disparues.
+                    </p>
+
+
+                    <p>
+                        L’objectif est de créer progressivement
+                        un écosystème numérique capable de rapprocher
+                        les familles, les citoyens et les acteurs
+                        impliqués dans les recherches.
+                    </p>
+
+
+                    <a
+                        href="#contact"
+                        class="btn btn-primary"
+                    >
+
+                        Découvrir le projet
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="about-card reveal">
+
+                    <img
+                        src="images/dashboarduser.png"
+                        alt="Tableau de bord Missing.CI"
+                        loading="lazy"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CTA FINAL
+        ========================================== -->
+
+        <section
+            class="cta"
+            id="contact"
+        >
+
+            <div class="container">
+
+                <div class="cta-box reveal">
+
+                    <div class="icon">
+
+                        <i class="fas fa-magnifying-glass"></i>
+
+                    </div>
+
+
+                    <h2>
+
+                        Chaque information<br>
+                        peut compter.
+
+                    </h2>
+
+
+                    <p>
+
+                        Ensemble, utilisons la technologie pour mieux
+                        diffuser les signalements et renforcer la
+                        mobilisation autour des personnes disparues.
+
+                    </p>
+
+
+                    <a
+                        href="signalement.html"
+                        class="btn btn-primary"
+                    >
+
+                        Signaler une disparition
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+
+        <div class="container">
+
+
+            <div class="footer-grid">
+
+
+                <div class="footer-brand">
+
+                    <div class="footer-logo">
+
+                        <img
+                            src="images/logo.png"
+                            alt="Logo Missing.CI"
+                        >
+
+                        <span>
+                            Missing.CI
+                        </span>
+
+                    </div>
+
+
+                    <p>
+
+                        Une plateforme ivoirienne dédiée à la
+                        centralisation, la diffusion et la mobilisation
+                        autour des signalements de personnes disparues.
+
+                    </p>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h4>
+                        Navigation
+                    </h4>
+
+                    <a href="#accueil">
+                        Accueil
+                    </a>
+
+                    <a href="#mission">
+                        Notre mission
+                    </a>
+
+                    <a href="#fonctionnalites">
+                        Fonctionnalités
+                    </a>
+
+                    <a href="#plateforme">
+                        La plateforme
+                    </a>
+
+                    <a href="#apropos">
+                        À propos
+                    </a>
+
+                </div>
+
+
+                <div class="footer-col">
+
+                    <h4>
+                        Plateforme
+                    </h4>
+
+                    <a href="signalement.html">
+                        Signaler une disparition
+                    </a>
+
+                    <a href="signalements.html">
+                        Voir les signalements
+                    </a>
+
+                    <a href="carte.html">
+                        Carte interactive
+                    </a>
+
+                    <a href="inscription.html">
+                        Créer un compte
+                    </a>
+
+                </div>
+
 
             </div>
 
 
-            <div class="footer-col">
+            <div class="copyright">
 
-                <h4>Navigation</h4>
-
-                <a href="#accueil">Accueil</a>
-                <a href="#mission">Notre mission</a>
-                <a href="#fonctionnalites">Fonctionnalités</a>
-                <a href="#plateforme">La plateforme</a>
-                <a href="#apropos">À propos</a>
-
-            </div>
+                <span>
+                    © 2026 Missing.CI — Tous droits réservés.
+                </span>
 
 
-            <div class="footer-col">
+                <span>
 
-                <h4>Plateforme</h4>
+                    Fait avec
 
-                <a href="#">Signaler une disparition</a>
-                <a href="#">Voir les signalements</a>
-                <a href="#">Carte interactive</a>
-                <a href="#">Créer un compte</a>
+                    <i
+                        class="fas fa-heart"
+                        style="color: #6ed3a7;"
+                    ></i>
+
+                    en Côte d’Ivoire
+
+                </span>
 
             </div>
+
 
         </div>
 
-
-        <div class="copyright">
-
-            <span>
-                © 2026 Missing.CI — Tous droits réservés.
-            </span>
-
-            <span>
-                Fait avec <i class="fas fa-heart" style="color:#6ed3a7;"></i> en Côte d'Ivoire
-            </span>
-
-        </div>
-
-    </div>
-
-</footer>
+    </footer>
 
 
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
+    <!-- =========================================
+         JAVASCRIPT
+         Placé volontairement à la fin du BODY
+    ========================================== -->
 
-<script>
+    <script>
 
-    /* =========================================
-       NAVBAR AU SCROLL
-    ========================================= */
+        /* =========================================
+           NAVBAR AU SCROLL
+        ========================================== */
 
-    const navbar = document.getElementById("navbar");
+        const navbar = document.getElementById("navbar");
 
-    window.addEventListener("scroll", () => {
+        window.addEventListener("scroll", () => {
 
-        if (window.scrollY > 30) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
+            if (window.scrollY > 30) {
 
-    });
+                navbar.classList.add("scrolled");
 
+            } else {
 
-    /* =========================================
-       MENU MOBILE
-    ========================================= */
+                navbar.classList.remove("scrolled");
 
-    const menuButton = document.getElementById("menuButton");
-    const navLinks = document.getElementById("navLinks");
-
-    menuButton.addEventListener("click", () => {
-
-        navLinks.classList.toggle("open");
-
-        const icon = menuButton.querySelector("i");
-
-        if (navLinks.classList.contains("open")) {
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-xmark");
-        } else {
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
-        }
-
-    });
-
-
-    /* Fermer le menu après clic */
-
-    document.querySelectorAll(".nav-links a").forEach(link => {
-
-        link.addEventListener("click", () => {
-
-            navLinks.classList.remove("open");
-
-            const icon = menuButton.querySelector("i");
-
-            icon.classList.remove("fa-xmark");
-            icon.classList.add("fa-bars");
+            }
 
         });
 
-    });
+
+        /* =========================================
+           MENU MOBILE
+        ========================================== */
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const navLinks =
+            document.getElementById("navLinks");
 
 
-    /* =========================================
-       ANIMATION AU SCROLL
-    ========================================= */
+        menuButton.addEventListener("click", () => {
 
-    const revealElements = document.querySelectorAll(".reveal");
+            const isOpen =
+                navLinks.classList.toggle("open");
 
-    const observer = new IntersectionObserver(
-        (entries) => {
 
-            entries.forEach(entry => {
+            menuButton.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
 
-                if (entry.isIntersecting) {
 
-                    entry.target.classList.add("visible");
+            const icon =
+                menuButton.querySelector("i");
 
-                    observer.unobserve(entry.target);
 
-                }
+            if (isOpen) {
+
+                icon.classList.remove("fa-bars");
+
+                icon.classList.add("fa-xmark");
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Fermer le menu"
+                );
+
+            } else {
+
+                icon.classList.remove("fa-xmark");
+
+                icon.classList.add("fa-bars");
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Ouvrir le menu"
+                );
+
+            }
+
+        });
+
+
+        /* =========================================
+           FERMER LE MENU APRÈS CLIC
+        ========================================== */
+
+        document
+            .querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    navLinks.classList.remove("open");
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    const icon =
+                        menuButton.querySelector("i");
+
+
+                    icon.classList.remove("fa-xmark");
+
+                    icon.classList.add("fa-bars");
+
+
+                    menuButton.setAttribute(
+                        "aria-label",
+                        "Ouvrir le menu"
+                    );
+
+                });
 
             });
 
-        },
-        {
-            threshold: 0.12
-        }
-    );
+
+        /* =========================================
+           ANIMATION AU SCROLL
+        ========================================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
 
 
-    revealElements.forEach(element => {
+        const observer =
+            new IntersectionObserver(
 
-        observer.observe(element);
+                (entries) => {
 
-    });
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: 0.12
+                }
+
+            );
 
 
-    /* =========================================
-       ANIMATION INITIALE HERO
-    ========================================= */
+        revealElements.forEach(element => {
 
-    window.addEventListener("load", () => {
-
-        document.querySelectorAll(".hero .reveal").forEach(element => {
-
-            setTimeout(() => {
-
-                element.classList.add("visible");
-
-            }, 150);
+            observer.observe(element);
 
         });
 
-    });
 
-</script>
+        /* =========================================
+           ANIMATION INITIALE HERO
+        ========================================== */
+
+        window.addEventListener("load", () => {
+
+            document
+                .querySelectorAll(".hero .reveal")
+                .forEach((element, index) => {
+
+                    setTimeout(() => {
+
+                        element.classList.add(
+                            "visible"
+                        );
+
+                    }, 150 + (index * 150));
+
+                });
+
+        });
+
+    </script>
+
 
 </body>
 </html>
