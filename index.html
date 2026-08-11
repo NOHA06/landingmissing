@@ -2,570 +2,2254 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Missing CI | Présentation immersive</title>
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#16805C">
+
+    <title>Missing.CI — Retrouver. Alerter. Mobiliser.</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
+        :root {
+            --green: #16805c;
+            --green-dark: #0e6247;
+            --green-light: #e5f6ee;
+            --green-soft: #f1faf6;
+
+            --cream: #fbfdfb;
+            --white: #ffffff;
+
+            --text: #17221d;
+            --text-light: #65736c;
+            --border: #e5ebe7;
+
+            --shadow-sm: 0 8px 30px rgba(22, 128, 92, 0.07);
+            --shadow-md: 0 20px 60px rgba(20, 70, 50, 0.10);
+            --shadow-lg: 0 30px 90px rgba(20, 70, 50, 0.14);
+
+            --radius: 24px;
+            --container: 1180px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0f2c;
-            color: #eef2ff;
+            font-family: "DM Sans", sans-serif;
+            color: var(--text);
+            background: var(--cream);
             overflow-x: hidden;
         }
 
-        /* Effet de particules / lumière subtile */
-        .bg-glow {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(circle at 20% 40%, rgba(79, 70, 229, 0.2), transparent 60%);
+        img {
+            max-width: 100%;
+            display: block;
         }
 
-        /* Conteneur principal : défilement horizontal doux */
-        .horizontal-scroll {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            height: 100vh;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(var(--container), calc(100% - 40px));
+            margin: auto;
+        }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all .3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255,255,255,.90);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 1px 0 rgba(20, 40, 30, .06);
+            padding: 12px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-family: "Manrope", sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        .logo img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .logo-text span {
+            color: var(--green);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            font-size: .92rem;
+            font-weight: 600;
+            color: #526159;
+        }
+
+        .nav-links a {
+            transition: color .2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .nav-button {
+            background: var(--green);
+            color: white !important;
+            padding: 11px 20px;
+            border-radius: 100px;
+            box-shadow: 0 8px 20px rgba(22,128,92,.18);
+        }
+
+        .nav-button:hover {
+            background: var(--green-dark);
+            color: white !important;
+        }
+
+        .menu-button {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            min-height: 100vh;
+            padding: 150px 0 90px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 85% 15%, rgba(22,128,92,.10), transparent 30%),
+                radial-gradient(circle at 5% 75%, rgba(112,194,153,.10), transparent 30%),
+                var(--cream);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(22,128,92,.05);
+            right: -250px;
+            top: 100px;
+            filter: blur(10px);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
             position: relative;
             z-index: 2;
-            scrollbar-width: none;
-        }
-        .horizontal-scroll::-webkit-scrollbar {
-            display: none;
         }
 
-        .slide {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-light);
+            color: var(--green-dark);
+            padding: 8px 14px;
+            border-radius: 100px;
+            font-size: .78rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .eyebrow i {
+            font-size: .7rem;
+        }
+
+        .hero h1 {
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            line-height: 1.02;
+            letter-spacing: -3px;
+            font-weight: 800;
+            margin-bottom: 26px;
+        }
+
+        .hero h1 span {
+            color: var(--green);
+        }
+
+        .hero-description {
+            font-size: 1.12rem;
+            line-height: 1.75;
+            color: var(--text-light);
+            max-width: 570px;
+            margin-bottom: 34px;
+        }
+
+        .hero-actions {
             display: flex;
             align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            padding: 2rem;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .92rem;
+            transition: all .25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+            box-shadow: 0 12px 28px rgba(22,128,92,.20);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: var(--green-dark);
+            box-shadow: 0 18px 35px rgba(22,128,92,.25);
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: #c8d9d0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+            color: #738078;
+            font-size: .84rem;
+        }
+
+        .hero-note i {
+            color: var(--green);
+        }
+
+        /* HERO VISUAL */
+
+        .hero-visual {
             position: relative;
         }
 
-        .card {
-            max-width: 1200px;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            border: 1px solid rgba(99, 102, 241, 0.4);
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(79, 70, 229, 0.2) inset;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            animation: fadeInUp 0.6s ease;
+        .hero-window {
+            background: white;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(20,60,40,.08);
+            transform: rotate(1.5deg);
+            position: relative;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
+        .window-bar {
+            height: 42px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 12px;
+        }
+
+        .window-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #dbe3df;
+        }
+
+        .window-url {
+            margin-left: 12px;
+            flex: 1;
+            background: #f4f7f5;
+            border-radius: 8px;
+            height: 24px;
+        }
+
+        .hero-screen {
+            border-radius: 17px;
+            overflow: hidden;
+            background: var(--green-soft);
+            min-height: 440px;
+        }
+
+        .hero-screen img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 15px 18px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-card.one {
+            left: -45px;
+            bottom: 50px;
+        }
+
+        .floating-card.two {
+            right: -35px;
+            top: 65px;
+            animation-delay: 1.5s;
+        }
+
+        .floating-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            background: var(--green-light);
+            color: var(--green);
+            border-radius: 12px;
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: .9rem;
+        }
+
+        .floating-card small {
+            color: var(--text-light);
+            font-size: .72rem;
+        }
+
+        @keyframes float {
+            0%,100% {
                 transform: translateY(0);
             }
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
-        .card-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding: 2rem;
-            align-items: center;
+        /* =========================================
+           STATS
+        ========================================= */
+
+        .stats {
+            padding: 25px 0 90px;
         }
 
-        .image-area {
-            flex: 1.2;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 28px;
+            text-align: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat strong {
+            font-family: "Manrope", sans-serif;
+            font-size: 2rem;
+            color: var(--green);
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 5px;
+            color: var(--text-light);
+            font-size: .85rem;
+        }
+
+        /* =========================================
+           SECTION HEADER
+        ========================================= */
+
+        section {
+            position: relative;
+        }
+
+        .section {
+            padding: 110px 0;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 60px;
             text-align: center;
         }
 
-        .image-area img {
-            max-width: 100%;
-            max-height: 65vh;
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
+        .section-label {
+            color: var(--green);
+            font-size: .78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
         }
 
-        .text-area {
-            flex: 0.8;
-            padding: 1rem;
+        .section-title {
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(2rem, 4vw, 3.3rem);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 18px;
         }
 
-        .text-area h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #c084fc, #818cf8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
+        .section-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
-        .text-area p {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #cbd5e1;
-            margin-bottom: 1rem;
+        /* =========================================
+           MISSION
+        ========================================= */
+
+        .mission {
+            background: white;
         }
 
-        .badge {
-            display: inline-block;
-            background: rgba(99, 102, 241, 0.3);
-            backdrop-filter: blur(4px);
-            padding: 0.3rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #a5b4fc;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(165, 180, 252, 0.3);
-        }
-
-        /* Navigation flèches */
-        .nav-arrows {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 20;
-            display: flex;
-            gap: 1rem;
-        }
-        .nav-arrows button {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(99, 102, 241, 0.6);
-            border-radius: 3rem;
-            width: 3rem;
-            height: 3rem;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
+        .mission-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 80px;
             align-items: center;
-            justify-content: center;
-        }
-        .nav-arrows button:hover {
-            background: #4f46e5;
-            transform: scale(1.05);
-            border-color: #c084fc;
         }
 
-        .dots {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.8rem;
-            z-index: 20;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 0.6rem 1.2rem;
-            border-radius: 3rem;
-            border: 1px solid rgba(99, 102, 241, 0.4);
+        .mission-image {
+            background: var(--green-soft);
+            padding: 25px;
+            border-radius: 28px;
+            position: relative;
         }
-        .dot {
-            width: 0.6rem;
-            height: 0.6rem;
+
+        .mission-image img {
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .mission-content h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: 2.5rem;
+            line-height: 1.15;
+            margin-bottom: 22px;
+            letter-spacing: -1px;
+        }
+
+        .mission-content h2 span {
+            color: var(--green);
+        }
+
+        .mission-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .check-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .check {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: .94rem;
+            font-weight: 600;
+        }
+
+        .check i {
+            color: var(--green);
+            background: var(--green-light);
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
             border-radius: 50%;
-            background-color: #94a3b8;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .dot.active {
-            background-color: #818cf8;
-            width: 1.8rem;
-            border-radius: 1rem;
-            box-shadow: 0 0 8px #a5b4fc;
+            display: grid;
+            place-items: center;
+            font-size: .7rem;
         }
 
-        .logo-fixed {
-            position: fixed;
-            top: 1.5rem;
-            left: 1.5rem;
-            z-index: 30;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 3rem;
-            padding: 0.5rem 1rem;
+        /* =========================================
+           FEATURES
+        ========================================= */
+
+        .features {
+            background: var(--cream);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all .3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: #d0e4d9;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--green-light);
+            color: var(--green);
+            font-size: 1.15rem;
+            margin-bottom: 22px;
+        }
+
+        .feature h3 {
+            font-family: "Manrope", sans-serif;
+            font-size: 1.08rem;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--text-light);
+            line-height: 1.65;
+            font-size: .9rem;
+        }
+
+        /* =========================================
+           HOW IT WORKS
+        ========================================= */
+
+        .how {
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+            display: grid;
+            place-items: center;
+            background: var(--green);
+            color: white;
+            border-radius: 50%;
+            font-family: "Manrope", sans-serif;
+            font-weight: 800;
+            box-shadow: 0 10px 25px rgba(22,128,92,.18);
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            font-family: "Manrope", sans-serif;
+        }
+
+        .step p {
+            color: var(--text-light);
+            line-height: 1.65;
+            font-size: .9rem;
+        }
+
+        /* =========================================
+           SCREENSHOTS
+        ========================================= */
+
+        .screenshots {
+            background: var(--green-soft);
+            overflow: hidden;
+        }
+
+        .showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+            margin-bottom: 90px;
+        }
+
+        .showcase:last-child {
+            margin-bottom: 0;
+        }
+
+        .showcase.reverse .showcase-image {
+            order: 2;
+        }
+
+        .showcase.reverse .showcase-content {
+            order: 1;
+        }
+
+        .showcase-image {
+            background: white;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(20,60,40,.06);
+        }
+
+        .showcase-image img {
+            width: 100%;
+            border-radius: 13px;
+            max-height: 560px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .showcase-content .section-label {
+            margin-bottom: 10px;
+        }
+
+        .showcase-content h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: 2.3rem;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .showcase-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .mini-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .mini-list div {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            border: 1px solid rgba(99, 102, 241, 0.4);
+            gap: 10px;
+            font-size: .88rem;
+            font-weight: 600;
         }
-        .logo-fixed img {
-            height: 2.2rem;
-            width: auto;
+
+        .mini-list i {
+            color: var(--green);
         }
-        .logo-fixed span {
-            font-weight: 700;
-            font-size: 1.1rem;
+
+        /* =========================================
+           MAP / COMMUNITY
+        ========================================= */
+
+        .community {
+            background: white;
+        }
+
+        .community-box {
+            background: var(--green);
+            border-radius: 30px;
+            padding: 70px;
+            color: white;
+            display: grid;
+            grid-template-columns: 1fr .8fr;
+            gap: 60px;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .community-box::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 50%;
+            right: -150px;
+            top: -150px;
+        }
+
+        .community-box h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: 2.6rem;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .community-box p {
+            color: rgba(255,255,255,.78);
+            line-height: 1.75;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .community-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .community-image img {
+            border-radius: 18px;
+            box-shadow: 0 25px 60px rgba(0,0,0,.18);
+            border: 4px solid rgba(255,255,255,.15);
+        }
+
+        /* =========================================
+           ABOUT
+        ========================================= */
+
+        .about {
+            background: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: 2.7rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-card {
+            background: white;
+            padding: 12px;
+            border-radius: 25px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-card img {
+            border-radius: 17px;
+        }
+
+        /* =========================================
+           FINAL CTA
+        ========================================= */
+
+        .cta {
+            padding: 110px 0;
+            background: white;
+        }
+
+        .cta-box {
+            text-align: center;
+            background: linear-gradient(135deg, #eef9f3, #f8fcfa);
+            border: 1px solid #dbece2;
+            border-radius: 30px;
+            padding: 80px 30px;
+        }
+
+        .cta-box .icon {
+            width: 65px;
+            height: 65px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 22px;
+            background: var(--green-light);
+            color: var(--green);
+            border-radius: 20px;
+            font-size: 1.4rem;
+        }
+
+        .cta-box h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(2rem,4vw,3.2rem);
+            line-height: 1.1;
+            margin-bottom: 18px;
+            letter-spacing: -1px;
+        }
+
+        .cta-box p {
+            color: var(--text-light);
+            max-width: 620px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            background: #12251d;
+            color: white;
+            padding: 55px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255,255,255,.10);
+        }
+
+        .footer-brand {
+            max-width: 350px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Manrope", sans-serif;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,.55);
+            line-height: 1.7;
+            font-size: .88rem;
+        }
+
+        .footer-col h4 {
+            font-family: "Manrope", sans-serif;
+            font-size: .9rem;
+            margin-bottom: 18px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: rgba(255,255,255,.55);
+            margin-bottom: 10px;
+            font-size: .85rem;
+            transition: color .2s;
+        }
+
+        .footer-col a:hover {
             color: white;
         }
 
-        @media (max-width: 800px) {
-            .card-content {
+        .copyright {
+            padding-top: 22px;
+            color: rgba(255,255,255,.4);
+            font-size: .78rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* =========================================
+           SCROLL REVEAL
+        ========================================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================================
+           MOBILE MENU
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                position: absolute;
+                top: 72px;
+                left: 20px;
+                right: 20px;
+                background: white;
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                padding: 20px;
+                box-shadow: var(--shadow-md);
+                display: none;
                 flex-direction: column;
-                text-align: center;
-                padding: 1.5rem;
+                align-items: stretch;
+                gap: 5px;
             }
-            .text-area h2 {
-                font-size: 1.7rem;
+
+            .nav-links.open {
+                display: flex;
             }
-            .nav-arrows {
-                bottom: 1rem;
-                right: 1rem;
+
+            .nav-links a {
+                padding: 12px;
             }
-            .dots {
-                bottom: 1rem;
+
+            .menu-button {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 125px;
+            }
+
+            .hero-grid,
+            .mission-grid,
+            .about-grid,
+            .community-box {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-grid {
+                gap: 50px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .floating-card.one {
+                left: 10px;
+                bottom: 25px;
+            }
+
+            .floating-card.two {
+                right: 10px;
+                top: 25px;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .showcase {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-bottom: 70px;
+            }
+
+            .showcase.reverse .showcase-image,
+            .showcase.reverse .showcase-content {
+                order: initial;
+            }
+
+            .community-box {
+                padding: 45px 30px;
+                gap: 35px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: min(100% - 28px, var(--container));
+            }
+
+            .hero {
+                padding-bottom: 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .hero-screen,
+            .hero-screen img {
+                height: 330px;
+                min-height: 330px;
+            }
+
+            .floating-card {
+                transform: scale(.85);
+            }
+
+            .floating-card.one {
+                left: -8px;
+            }
+
+            .floating-card.two {
+                right: -8px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+
+            .section {
+                padding: 75px 0;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-content h2,
+            .showcase-content h2,
+            .about-content h2 {
+                font-size: 2rem;
+            }
+
+            .community-box h2 {
+                font-size: 2.1rem;
+            }
+
+            .cta {
+                padding: 75px 0;
+            }
+
+            .cta-box {
+                padding: 55px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .copyright {
+                flex-direction: column;
             }
         }
     </style>
 </head>
+
 <body>
-<div class="bg-glow"></div>
 
-<!-- Logo permanent -->
-<div class="logo-fixed">
-    <img src="images/logo.png" alt="Missing CI">
-    <span>Missing.CI</span>
-</div>
+<!-- =========================================
+     NAVIGATION
+========================================= -->
 
-<!-- Flèches de navigation -->
-<div class="nav-arrows">
-    <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-    <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-</div>
+<header class="navbar" id="navbar">
+    <div class="container nav-inner">
 
-<div class="dots" id="dotsContainer"></div>
+        <a href="#accueil" class="logo">
+            <img src="images/logo.png" alt="Missing CI">
+            <div class="logo-text">
+                Missing<span>.CI</span>
+            </div>
+        </a>
 
-<div class="horizontal-scroll" id="scrollContainer">
+        <nav class="nav-links" id="navLinks">
+            <a href="#mission">Notre mission</a>
+            <a href="#fonctionnalites">Fonctionnalités</a>
+            <a href="#plateforme">La plateforme</a>
+            <a href="#apropos">À propos</a>
+            <a href="#contact" class="nav-button">Signaler une disparition</a>
+        </nav>
 
-    <!-- 🆕 SLIDE 0 : PRÉSENTATION DE MISSING CI -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content" style="flex-direction: column; text-align: center;">
-                <div class="text-area" style="flex: unset;">
-                    
-                    <h2>🔍 Missing CI</h2>
-                    <p style="max-width: 800px; margin: 0 auto;">
-                       Une plateforme ivoirienne dédiée à la centralisation et à la diffusion des signalements de personnes disparues.
-                        Notre mission : <strong>accélérer les recherches, mobiliser la communauté et aider les familles</strong> grâce à la technologie.
-                    </p>
-                    <p style="margin-top: 1rem;">
-                        ✔ Signalements ✔ Dossiers complets ✔ Carte interactive ✔ Alertes ✔ Partage instantané
-                    </p>
-                    <div style="margin-top: 2rem;">
-                        <i class="fas fa-arrow-right" style="color: #818cf8; font-size: 2rem; animation: bounce 1.5s infinite;"></i>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Découvrez les fonctionnalités ci-dessous</p>
+        <button class="menu-button" id="menuButton" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+    </div>
+</header>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<main>
+
+<section class="hero" id="accueil">
+
+    <div class="container hero-grid">
+
+        <div class="hero-content reveal">
+
+            <div class="eyebrow">
+                <i class="fas fa-heart"></i>
+                Une initiative ivoirienne
+            </div>
+
+            <h1>
+                Retrouver.<br>
+                <span>Alerter.</span><br>
+                Mobiliser.
+            </h1>
+
+            <p class="hero-description">
+                Missing.CI est une plateforme dédiée à la centralisation
+                et à la diffusion des signalements de personnes disparues
+                en Côte d’Ivoire.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#plateforme" class="btn btn-primary">
+                    Découvrir la plateforme
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="#mission" class="btn btn-secondary">
+                    Notre mission
+                </a>
+            </div>
+
+            <div class="hero-note">
+                <i class="fas fa-shield-halved"></i>
+                Une technologie au service de la solidarité citoyenne.
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual reveal">
+
+            <div class="hero-window">
+
+                <div class="window-bar">
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                    <span class="window-dot"></span>
+                    <div class="window-url"></div>
+                </div>
+
+                <div class="hero-screen">
+                    <img src="images/acceuil.png" alt="Interface Missing CI">
+                </div>
+
+            </div>
+
+
+            <div class="floating-card one">
+
+                <div class="floating-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+
+                <div>
+                    <strong>Signalement rapide</strong>
+                    <small>Quelques étapes seulement</small>
+                </div>
+
+            </div>
+
+
+            <div class="floating-card two">
+
+                <div class="floating-icon">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+
+                <div>
+                    <strong>Carte interactive</strong>
+                    <small>Localiser les signalements</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     STATS
+========================================= -->
+
+<section class="stats">
+
+    <div class="container">
+
+        <div class="stats-grid reveal">
+
+            <div class="stat">
+                <strong>24/7</strong>
+                <span>Plateforme accessible</span>
+            </div>
+
+            <div class="stat">
+                <strong>1</strong>
+                <span>Point centralisé pour les signalements</span>
+            </div>
+
+            <div class="stat">
+                <strong>100%</strong>
+                <span>Mobilisation citoyenne</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     MISSION
+========================================= -->
+
+<section class="section mission" id="mission">
+
+    <div class="container mission-grid">
+
+        <div class="mission-image reveal">
+            <img src="images/apropos.png" alt="À propos de Missing CI">
+        </div>
+
+        <div class="mission-content reveal">
+
+            <div class="section-label">Notre mission</div>
+
+            <h2>
+                La technologie peut
+                <span>rapprocher</span>
+                les familles.
+            </h2>
+
+            <p>
+                Lorsqu'une personne disparaît, chaque minute compte.
+                Pourtant, les informations peuvent être dispersées entre
+                différents réseaux sociaux, affiches et messages.
+            </p>
+
+            <p>
+                Missing.CI propose un espace centralisé permettant de
+                structurer les informations, faciliter leur diffusion
+                et encourager la participation de la communauté.
+            </p>
+
+            <div class="check-list">
+
+                <div class="check">
+                    <i class="fas fa-check"></i>
+                    <span>Centraliser les signalements</span>
+                </div>
+
+                <div class="check">
+                    <i class="fas fa-check"></i>
+                    <span>Faciliter la diffusion des informations</span>
+                </div>
+
+                <div class="check">
+                    <i class="fas fa-check"></i>
+                    <span>Encourager les témoignages citoyens</span>
+                </div>
+
+                <div class="check">
+                    <i class="fas fa-check"></i>
+                    <span>Utiliser la cartographie pour mieux localiser</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FONCTIONNALITES
+========================================= -->
+
+<section class="section features" id="fonctionnalites">
+
+    <div class="container">
+
+        <div class="section-header reveal">
+
+            <div class="section-label">
+                Fonctionnalités
+            </div>
+
+            <h2 class="section-title">
+                Tout ce qu'il faut pour
+                mieux rechercher.
+            </h2>
+
+            <p class="section-description">
+                Une plateforme pensée pour les familles, les citoyens
+                et toutes les personnes souhaitant contribuer aux recherches.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-file-circle-plus"></i>
+                </div>
+
+                <h3>Signalement</h3>
+
+                <p>
+                    Créez rapidement un dossier avec les informations
+                    essentielles concernant une personne disparue.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+
+                <h3>Dossier complet</h3>
+
+                <p>
+                    Photo, description, date, lieu, signes distinctifs
+                    et informations utiles sont regroupés au même endroit.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-map-location-dot"></i>
+                </div>
+
+                <h3>Carte interactive</h3>
+
+                <p>
+                    Visualisez les signalements sur une carte afin
+                    de mieux comprendre leur localisation.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-filter"></i>
+                </div>
+
+                <h3>Recherche avancée</h3>
+
+                <p>
+                    Filtrez les dossiers par région, âge, date ou
+                    statut afin de retrouver plus facilement une information.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-share-nodes"></i>
+                </div>
+
+                <h3>Partage instantané</h3>
+
+                <p>
+                    Diffusez facilement un dossier grâce à un lien unique
+                    partageable sur les réseaux sociaux et messageries.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+
+                <h3>Témoignages</h3>
+
+                <p>
+                    Les citoyens peuvent transmettre des informations
+                    susceptibles d'aider les recherches.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-print"></i>
+                </div>
+
+                <h3>Affiches personnalisées</h3>
+
+                <p>
+                    Générez rapidement un visuel prêt à être diffusé
+                    ou imprimé dans les lieux publics.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <h3>Espace personnel</h3>
+
+                <p>
+                    Retrouvez vos signalements, vos informations et
+                    les activités liées à votre compte.
+                </p>
+            </div>
+
+
+            <div class="feature reveal">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-simple"></i>
+                </div>
+
+                <h3>Tableau de bord</h3>
+
+                <p>
+                    Consultez les statistiques et suivez facilement
+                    l'évolution de vos signalements.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     COMMENT ÇA MARCHE
+========================================= -->
+
+<section class="section how">
+
+    <div class="container">
+
+        <div class="section-header reveal">
+
+            <div class="section-label">
+                Comment ça marche ?
+            </div>
+
+            <h2 class="section-title">
+                Signaler en quelques étapes.
+            </h2>
+
+            <p class="section-description">
+                Missing.CI simplifie le processus pour permettre
+                à chacun de contribuer rapidement.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step reveal">
+
+                <div class="step-number">01</div>
+
+                <h3>Créer un signalement</h3>
+
+                <p>
+                    Renseignez les informations disponibles et ajoutez
+                    une photo de la personne recherchée.
+                </p>
+
+            </div>
+
+
+            <div class="step reveal">
+
+                <div class="step-number">02</div>
+
+                <h3>Diffuser l'information</h3>
+
+                <p>
+                    Le dossier peut être partagé facilement afin
+                    d'augmenter sa visibilité.
+                </p>
+
+            </div>
+
+
+            <div class="step reveal">
+
+                <div class="step-number">03</div>
+
+                <h3>Mobiliser la communauté</h3>
+
+                <p>
+                    Les citoyens peuvent consulter le dossier et
+                    transmettre des informations utiles.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     PLATEFORME
+========================================= -->
+
+<section class="section screenshots" id="plateforme">
+
+    <div class="container">
+
+        <div class="section-header reveal">
+
+            <div class="section-label">
+                La plateforme
+            </div>
+
+            <h2 class="section-title">
+                Une expérience simple,
+                pensée pour l'action.
+            </h2>
+
+            <p class="section-description">
+                Découvrez les principales interfaces de Missing.CI.
+            </p>
+
+        </div>
+
+
+        <!-- ACCUEIL -->
+
+        <div class="showcase reveal">
+
+            <div class="showcase-image">
+                <img src="images/acceuil.png" alt="Accueil Missing CI">
+            </div>
+
+            <div class="showcase-content">
+
+                <div class="section-label">
+                    Interface principale
+                </div>
+
+                <h2>
+                    Une vue d'ensemble
+                    dès le premier regard.
+                </h2>
+
+                <p>
+                    La page d'accueil permet d'accéder rapidement aux
+                    différentes fonctionnalités de la plateforme et
+                    de découvrir les derniers signalements.
+                </p>
+
+                <div class="mini-list">
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Derniers signalements
                     </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Actions rapides
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Accès aux recherches
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
+
+
+        <!-- FORMULAIRE -->
+
+        <div class="showcase reverse reveal">
+
+            <div class="showcase-image">
+                <img src="images/signalementform.png" alt="Formulaire de signalement">
+            </div>
+
+            <div class="showcase-content">
+
+                <div class="section-label">
+                    Signalement
+                </div>
+
+                <h2>
+                    Transformer une information
+                    en dossier structuré.
+                </h2>
+
+                <p>
+                    Le formulaire rassemble les informations essentielles
+                    pour créer un signalement clair et exploitable.
+                </p>
+
+                <div class="mini-list">
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Informations personnelles
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Photo de la personne
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Lieu et date de disparition
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Signes distinctifs
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ARCHIVES -->
+
+        <div class="showcase reveal">
+
+            <div class="showcase-image">
+                <img src="images/archive.png" alt="Archives Missing CI">
+            </div>
+
+            <div class="showcase-content">
+
+                <div class="section-label">
+                    Archives
+                </div>
+
+                <h2>
+                    Retrouver rapidement
+                    un dossier.
+                </h2>
+
+                <p>
+                    Les archives regroupent les dossiers enregistrés
+                    sur la plateforme. La recherche et les filtres
+                    permettent de retrouver une personne plus facilement.
+                </p>
+
+                <div class="mini-list">
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Recherche par nom
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Filtres par statut
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Filtres géographiques
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DETAIL -->
+
+        <div class="showcase reverse reveal">
+
+            <div class="showcase-image">
+                <img src="images/detaildisparition.png" alt="Détail d'une disparition">
+            </div>
+
+            <div class="showcase-content">
+
+                <div class="section-label">
+                    Fiche individuelle
+                </div>
+
+                <h2>
+                    Toutes les informations
+                    réunies au même endroit.
+                </h2>
+
+                <p>
+                    Chaque personne dispose d'une fiche dédiée regroupant
+                    les informations importantes permettant de faciliter
+                    son identification.
+                </p>
+
+                <div class="mini-list">
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Photo et informations personnelles
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Chronologie
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Témoignages
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Partage du dossier
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CARTE -->
+
+        <div class="showcase reveal">
+
+            <div class="showcase-image">
+                <img src="images/carte.png" alt="Carte interactive Missing CI">
+            </div>
+
+            <div class="showcase-content">
+
+                <div class="section-label">
+                    Cartographie
+                </div>
+
+                <h2>
+                    Voir les signalements
+                    sur une carte.
+                </h2>
+
+                <p>
+                    La cartographie interactive permet de visualiser
+                    les différents signalements et leur localisation.
+                </p>
+
+                <div class="mini-list">
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Localisation géographique
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Points interactifs
+                    </div>
+
+                    <div>
+                        <i class="fas fa-check"></i>
+                        Accès direct aux dossiers
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AFFICHES -->
+
+        <div class="showcase reverse reveal">
+
+            <div class="showcase-image">
+                <img src="images/affiche.png" alt="Affiche Missing CI">
+            </div>
+
+            <div class="showcase-content">
+
+                <div class="section-label">
+                    Diffusion
+                </div>
+
+                <h2>
+                    Une affiche prête
+                    à être partagée.
+                </h2>
+
+                <p>
+                    Chaque signalement peut être transformé en visuel
+                    afin de faciliter sa diffusion sur les réseaux sociaux,
+                    dans les groupes communautaires ou dans les espaces publics.
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- Slide 1 – acceuil.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/acceuil.png" alt="Accueil">
+</section>
+
+
+<!-- =========================================
+     COMMUNAUTE
+========================================= -->
+
+<section class="section community">
+
+    <div class="container">
+
+        <div class="community-box reveal">
+
+            <div>
+
+                <div class="section-label" style="color:#b8ecd5;">
+                    Mobilisation citoyenne
                 </div>
-                <div class="text-area">
-                    <div class="badge">Interface principale</div>
-                    <h2>🏠 Vue d’ensemble</h2>
-                    <p>Page d'accueil dynamique présentant les derniers signalements, les actions rapides et l'appel à la solidarité citoyenne.</p>
-                </div>
+
+                <h2>
+                    Une personne disparue
+                    concerne toute une communauté.
+                </h2>
+
+                <p>
+                    Un partage, une information, un témoignage ou un simple
+                    regard attentif peut parfois faire la différence.
+                    Missing.CI veut faciliter cette mobilisation grâce à
+                    une information structurée et accessible.
+                </p>
+
             </div>
+
+            <div class="community-image">
+
+                <img src="images/commentiare.png" alt="Participation citoyenne">
+
+            </div>
+
         </div>
+
     </div>
 
-    <!-- Slide 2 – acceuil2.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/acceuil2.png" alt="Accueil 2">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Mobilisation</div>
-                    <h2>📢 Actualités et alertes</h2>
-                    <p>Suivez en temps réel les nouvelles disparitions et les appels à témoins.</p>
-                </div>
+</section>
+
+
+<!-- =========================================
+     A PROPOS
+========================================= -->
+
+<section class="section about" id="apropos">
+
+    <div class="container about-grid">
+
+        <div class="about-content reveal">
+
+            <div class="section-label">
+                À propos du projet
             </div>
+
+            <h2>
+                Une solution numérique
+                pensée pour la Côte d'Ivoire.
+            </h2>
+
+            <p>
+                Missing.CI est un projet conçu pour répondre à un besoin
+                concret : améliorer la centralisation et la diffusion
+                des informations relatives aux personnes disparues.
+            </p>
+
+            <p>
+                L'objectif est de créer progressivement un écosystème
+                numérique capable de rapprocher les familles, les citoyens
+                et les acteurs impliqués dans les recherches.
+            </p>
+
+            <a href="#contact" class="btn btn-primary">
+                Découvrir le projet
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
         </div>
+
+
+        <div class="about-card reveal">
+
+            <img src="images/dashboarduser.png" alt="Tableau de bord Missing CI">
+
+        </div>
+
     </div>
 
-    <!-- Slide 3 – acceuil3.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/acceuil3.png" alt="Accueil 3">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Chiffres clés</div>
-                    <h2>⚡ Boutons d'actions</h2>
-              <p>Cliquez sur le bouton d’action pour ouvrir le formulaire de signalement et déclarer une disparition en quelques étapes simples.</p> </div>
+</section>
+
+
+<!-- =========================================
+     CTA
+========================================= -->
+
+<section class="cta" id="contact">
+
+    <div class="container">
+
+        <div class="cta-box reveal">
+
+            <div class="icon">
+                <i class="fas fa-magnifying-glass"></i>
             </div>
+
+            <h2>
+                Chaque information<br>
+                peut compter.
+            </h2>
+
+            <p>
+                Ensemble, utilisons la technologie pour mieux diffuser
+                les signalements et renforcer la mobilisation autour
+                des personnes disparues.
+            </p>
+
+            <a href="#" class="btn btn-primary">
+                Signaler une disparition
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
         </div>
+
     </div>
 
-    <!-- Slide 4 – signalementform.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/signalementform.png" alt="Signalement">
+</section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+
+                    <img src="images/logo.png" alt="Missing CI">
+
+                    <span>Missing.CI</span>
+
                 </div>
-                <div class="text-area">
-                    <div class="badge">Démarche simplifiée</div>
-                    <h2>📝 Création d’un signalement</h2>
-                    <p>Formulaire complet : photos, description, lieu, date, signes distinctifs. Un dossier de qualité pour faciliter les recherches.</p>
-                </div>
+
+                <p>
+                    Une plateforme ivoirienne dédiée à la centralisation,
+                    la diffusion et la mobilisation autour des signalements
+                    de personnes disparues.
+                </p>
+
             </div>
+
+
+            <div class="footer-col">
+
+                <h4>Navigation</h4>
+
+                <a href="#accueil">Accueil</a>
+                <a href="#mission">Notre mission</a>
+                <a href="#fonctionnalites">Fonctionnalités</a>
+                <a href="#plateforme">La plateforme</a>
+                <a href="#apropos">À propos</a>
+
+            </div>
+
+
+            <div class="footer-col">
+
+                <h4>Plateforme</h4>
+
+                <a href="#">Signaler une disparition</a>
+                <a href="#">Voir les signalements</a>
+                <a href="#">Carte interactive</a>
+                <a href="#">Créer un compte</a>
+
+            </div>
+
         </div>
+
+
+        <div class="copyright">
+
+            <span>
+                © 2026 Missing.CI — Tous droits réservés.
+            </span>
+
+            <span>
+                Fait avec <i class="fas fa-heart" style="color:#6ed3a7;"></i> en Côte d'Ivoire
+            </span>
+
+        </div>
+
     </div>
 
-    <!-- Slide 5 – archive.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/archive.png" alt="Archives">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Historique</div>
-                    <h2>📚 Archives des dossiers</h2>
-                    <p>Liste paginée et filtrable (nom, date, statut) pour consulter tous les cas enregistrés.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+</footer>
 
-    <!-- Slide 6 – double (archive.png et filtrearchive.png) -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area" style="display: flex; flex-direction: column; gap: 1rem;">
-                    <img src="images/filtrearchive.png" alt="Filtre à Chypre" style="max-height: 30vh;">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Recherche avancée</div>
-                    <h2>🔍 Filtres & cartographie</h2>
-                    <p>Affinez par région, âge, type de disparition. La carte interactive (leaflet) vous guide.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 7 – detaildisparition.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/detaildisparition.png" alt="Fiche détail">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Informations vitales</div>
-                    <h2>👤 Fiche individuelle</h2>
-                    <p>Photo, âge, taille, signes distinctifs, chronologie des événements, témoignages et bouton "Alerte Amber".</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 8 – liensdisparition.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/liensdisparition.png" alt="Partage lien">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Viralité</div>
-                    <h2>🔗 Partage instantané</h2>
-                    <p>Copiez le lien unique d'un dossier et diffusez-le sur WhatsApp, Facebook, etc.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 9 – commentiare.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/commentiare.png" alt="Commentaires">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Participation citoyenne</div>
-                    <h2>💬 Témoignages</h2>
-                    <p>Les utilisateurs peuvent laisser des informations vérifiées par un modérateur.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 10 – affiche.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/affiche.png" alt="Affiche personnalisée">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Outils pratique</div>
-                    <h2>🖼️ Génération d'affiche</h2>
-                    <p>Cliquez "Voir l'affiche" pour obtenir un visuel prêt à imprimer et diffuser dans l'espace public.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 11 – apropos.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/apropos.png" alt="À propos">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Notre mission</div>
-                    <h2>📖 À propos du projet</h2>
-                    <p>Missing CI est une plateforme ivoirienne innovante pour centraliser et accélérer la recherche de personnes disparues.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 12 – carte.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/carte.png" alt="Carte">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Géolocalisation</div>
-                    <h2>🗺️ Cartographie interactive</h2>
-                    <p>Un point rouge par disparition. Cliquez pour accéder au dossier. Identifiez les zones à risque.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 13 – profil.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/profil.png" alt="Profil util">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Espace personnel</div>
-                    <h2>👤 Profil utilisateur</h2>
-                    <p>Gérez vos informations, photo de profil, mots de passe et préférences.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 14 – dashboarduser.png -->
-    <div class="slide">
-        <div class="card">
-            <div class="card-content">
-                <div class="image-area">
-                    <img src="images/dashboarduser.png" alt="Dashboard">
-                </div>
-                <div class="text-area">
-                    <div class="badge">Statistiques & suivi</div>
-                    <h2>📊 Tableau de bord</h2>
-                    <p>Visualisez vos signalements, statistiques personnelles et notifications.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
 <script>
-    const scrollContainer = document.getElementById('scrollContainer');
-    const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const dotsContainer = document.getElementById('dotsContainer');
-    let currentIndex = 0;
-    let totalSlides = slides.length;
 
-    function createDots() {
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            dot.addEventListener('click', () => { scrollToSlide(i); });
-            dotsContainer.appendChild(dot);
+    /* =========================================
+       NAVBAR AU SCROLL
+    ========================================= */
+
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 30) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
         }
-        updateActiveDot();
-    }
 
-    function updateActiveDot() {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, idx) => {
-            if (idx === currentIndex) dot.classList.add('active');
-            else dot.classList.remove('active');
-        });
-    }
-
-    function scrollToSlide(index) {
-        if (index < 0) index = 0;
-        if (index >= totalSlides) index = totalSlides - 1;
-        currentIndex = index;
-        const slideWidth = slides[0].clientWidth;
-        scrollContainer.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
-        updateActiveDot();
-    }
-
-    function nextSlide() {
-        if (currentIndex + 1 < totalSlides) scrollToSlide(currentIndex + 1);
-    }
-    function prevSlide() {
-        if (currentIndex - 1 >= 0) scrollToSlide(currentIndex - 1);
-    }
-
-    scrollContainer.addEventListener('scroll', () => {
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const newIndex = Math.round(scrollContainer.scrollLeft / containerRect.width);
-        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalSlides) {
-            currentIndex = newIndex;
-            updateActiveDot();
-        }
     });
 
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-    window.addEventListener('resize', () => scrollToSlide(currentIndex));
 
-    createDots();
-    setTimeout(() => scrollToSlide(0), 100);
+    /* =========================================
+       MENU MOBILE
+    ========================================= */
+
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    menuButton.addEventListener("click", () => {
+
+        navLinks.classList.toggle("open");
+
+        const icon = menuButton.querySelector("i");
+
+        if (navLinks.classList.contains("open")) {
+            icon.classList.remove("fa-bars");
+            icon.classList.add("fa-xmark");
+        } else {
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+        }
+
+    });
+
+
+    /* Fermer le menu après clic */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navLinks.classList.remove("open");
+
+            const icon = menuButton.querySelector("i");
+
+            icon.classList.remove("fa-xmark");
+            icon.classList.add("fa-bars");
+
+        });
+
+    });
+
+
+    /* =========================================
+       ANIMATION AU SCROLL
+    ========================================= */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+
+    revealElements.forEach(element => {
+
+        observer.observe(element);
+
+    });
+
+
+    /* =========================================
+       ANIMATION INITIALE HERO
+    ========================================= */
+
+    window.addEventListener("load", () => {
+
+        document.querySelectorAll(".hero .reveal").forEach(element => {
+
+            setTimeout(() => {
+
+                element.classList.add("visible");
+
+            }, 150);
+
+        });
+
+    });
+
 </script>
+
 </body>
 </html>
